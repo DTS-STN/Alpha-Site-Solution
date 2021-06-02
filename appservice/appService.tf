@@ -1,6 +1,6 @@
 # Create App Service Plans
 resource "azurerm_app_service_plan" "app-service-plan-primary" {
-  name                = "${var.application_name}-asp-${var.environment}-${var.location}"
+  name                = "asp-${var.environment}-${var.location}"
   kind                = "Linux"
   reserved            = true
   location            = var.location
@@ -13,7 +13,7 @@ resource "azurerm_app_service_plan" "app-service-plan-primary" {
 }
 
 resource "azurerm_app_service_plan" "app-service-plan-secondary" {
-  name                = "${var.application_name}-asp-${var.environment}-${var.backup_location}"
+  name                = "asp-${var.environment}-${var.backup_location}"
   kind                = "Linux"
   reserved            = true
   location            = var.backup_location
@@ -27,7 +27,7 @@ resource "azurerm_app_service_plan" "app-service-plan-secondary" {
 
 # Create App Services
 resource "azurerm_app_service" "app-service-primary" {
-  name                = "${var.application_name}-as-${var.environment}-${var.location}"
+  name                = "as-${var.environment}-${var.location}"
   location            = var.location
   resource_group_name = var.appservice_resource_group
   app_service_plan_id = azurerm_app_service_plan.app-service-plan-primary.id
@@ -64,7 +64,7 @@ resource "azurerm_app_service" "app-service-primary" {
 }
 
 resource "azurerm_app_service" "app-service-secondary" {
-  name                = "${var.application_name}-as-${var.environment}-${var.backup_location}"
+  name                = "as-${var.environment}-${var.backup_location}"
   location            = var.backup_location
   resource_group_name = var.appservice_resource_group
   app_service_plan_id = azurerm_app_service_plan.app-service-plan-secondary.id

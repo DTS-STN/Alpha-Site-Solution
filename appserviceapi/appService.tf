@@ -1,6 +1,6 @@
 # Create App Services
 resource "azurerm_app_service" "app-service-api-primary" {
-  name                = "${var.application_name}-api-as-${var.environment}-${var.location}"
+  name                = "api-as-${var.environment}-${var.location}"
   location            = var.location
   resource_group_name = var.appservice_resource_group
   app_service_plan_id = var.primary_app_service_plan_id
@@ -53,7 +53,7 @@ resource "azurerm_app_service" "app-service-api-primary" {
 }
 
 resource "azurerm_app_service" "app-service-api-secondary" {
-  name                = "${var.application_name}-api-as-${var.environment}-${var.backup_location}"
+  name                = "api-as-${var.environment}-${var.backup_location}"
   location            = var.backup_location
   resource_group_name = var.appservice_resource_group
   app_service_plan_id = var.secondary_app_service_plan_id

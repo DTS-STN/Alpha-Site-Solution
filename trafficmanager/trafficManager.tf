@@ -1,6 +1,6 @@
 # Create Traffic Manager API Profile
 resource "azurerm_traffic_manager_profile" "traffic-manager" {
-  name                   = "${var.application_name}-as-traffic-manager"
+  name                   = "as-traffic-manager"
   resource_group_name    = var.network_resource_group
   traffic_routing_method = "Performance"
 
@@ -18,7 +18,7 @@ resource "azurerm_traffic_manager_profile" "traffic-manager" {
 
 
 resource "azurerm_traffic_manager_endpoint" "tm-endpoint-primary" {
-  name                = "${var.application_name}-tm-endpoint-primary"
+  name                = "tm-endpoint-primary"
   resource_group_name = var.network_resource_group
   profile_name        = azurerm_traffic_manager_profile.traffic-manager.name
   type                = "externalEndpoints"
@@ -26,7 +26,7 @@ resource "azurerm_traffic_manager_endpoint" "tm-endpoint-primary" {
   endpoint_location   = var.location
 }
 resource "azurerm_traffic_manager_endpoint" "tm-endpoint-secondary" {
-  name                = "${var.application_name}-tm-endpoint-secondary"
+  name                = "tm-endpoint-secondary"
   resource_group_name = var.network_resource_group
   profile_name        = azurerm_traffic_manager_profile.traffic-manager.name
   type                = "externalEndpoints"

@@ -1,19 +1,19 @@
 resource "azurerm_virtual_network" "appservice_vnet" {
-  name                = "${var.application_name}-appservice_vnet"
+  name                = "appservice_vnet"
   resource_group_name = var.network_resource_group
   location            = var.location
   address_space       = ["10.254.0.0/16"]
 }
 
 resource "azurerm_virtual_network" "appservice_vnet_secondary" {
-  name                = "${var.application_name}-appservice_vnet_secondary"
+  name                = "appservice_vnet_secondary"
   resource_group_name = var.network_resource_group
   location            = var.backup_location
   address_space       = ["10.254.0.0/16"]
 }
 
 resource "azurerm_subnet" "frontend" {
-  name                 = "${var.application_name}-subnet-frontend"
+  name                 = "subnet-frontend"
   resource_group_name  = var.network_resource_group
   virtual_network_name = azurerm_virtual_network.appservice_vnet.name
   address_prefixes     = ["10.254.0.0/24"]
@@ -21,7 +21,7 @@ resource "azurerm_subnet" "frontend" {
 }
 
 resource "azurerm_subnet" "frontend_secondary" {
-  name                 = "${var.application_name}-subnet-frontend_secondary"
+  name                 = "subnet-frontend_secondary"
   resource_group_name  = var.network_resource_group
   virtual_network_name = azurerm_virtual_network.appservice_vnet_secondary.name
   address_prefixes     = ["10.254.0.0/24"]
@@ -29,7 +29,7 @@ resource "azurerm_subnet" "frontend_secondary" {
 }
 
 resource "azurerm_public_ip" "appgateway_publicip_primary" {
-  name                = "${var.application_name}-appgateway_publicip_primary"
+  name                = "appgateway_publicip_primary"
   resource_group_name = var.network_resource_group
   location            = var.location
   allocation_method   = "Static"
@@ -38,7 +38,7 @@ resource "azurerm_public_ip" "appgateway_publicip_primary" {
 }
 
 resource "azurerm_public_ip" "appgateway_publicip_secondary" {
-  name                = "${var.application_name}-appgateway_publicip_secondary"
+  name                = "appgateway_publicip_secondary"
   resource_group_name = var.network_resource_group
   location            = var.backup_location
   allocation_method   = "Static"

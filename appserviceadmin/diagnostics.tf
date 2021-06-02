@@ -1,5 +1,5 @@
 resource "azurerm_monitor_diagnostic_setting" "as-admin-primary-diagnostics" {
-  name               = "${var.application_name}-admin-diagnostics-${var.environment}-${var.location}"
+  name               = "admin-diagnostics-${var.environment}-${var.location}"
   target_resource_id = azurerm_app_service.app-service-admin-primary.id
   storage_account_id = var.diagnostic_storage_account_id
 
@@ -82,7 +82,7 @@ log {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "as-admin-secondary-diagnostics" {
-  name               = "${var.application_name}-admin-diagnostics-${var.environment}-${var.backup_location}"
+  name               = "admin-diagnostics-${var.environment}-${var.backup_location}"
   target_resource_id = azurerm_app_service.app-service-admin-secondary.id
   storage_account_id = var.diagnostic_storage_account_id_secondary
 

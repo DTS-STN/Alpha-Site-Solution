@@ -17,7 +17,7 @@ resource "azurerm_postgresql_server" "pgsql-server" {
 }
 
 resource "azurerm_postgresql_database" "pgsql-db" {
-  name                = "${var.application_name}-pgsql-db-${var.environment}"
+  name                = "pgsql-db-${var.environment}"
   resource_group_name = var.database_resource_group
   server_name         = azurerm_postgresql_server.pgsql-server.name
   charset             = "UTF8"
