@@ -11,7 +11,11 @@ dependency "infrastructure" {
 }
 
 dependency "appService" {
-  config_path = "../appService"
+  config_path = "../appservice"
+}
+
+dependency "appServiceAdmin" {
+  config_path = "../appserviceadmin"
 }
 
 inputs = merge({
@@ -22,7 +26,7 @@ inputs = merge({
     diagnostic_storage_account_id = dependency.infrastructure.outputs.diagnosticStorageAccountId
     secondary_diagnostic_storage_account_id = dependency.infrastructure.outputs.diagnosticStorageAccountId_secondary
     app_service_plan_id = dependency.appService.outputs.primaryAppServicePlanId
-    database_pass = dependency.infrastructure.outputs.pgsqlDbPass
+    database_pass = dependency.pgsql.outputs.pgsqlDbPass
     database_host = dependency.pgsql.outputs.pgsql-server-fqdn
     database_login = dependency.pgsql.outputs.pgsql-server-login
     database_server = dependency.pgsql.outputs.pgsql-server-name
@@ -33,6 +37,7 @@ inputs = merge({
     docker_registry = dependency.infrastructure.outputs.dockerRegistryLogin
     docker_registry_username = dependency.infrastructure.outputs.dockerRegistryUsername
     docker_registry_password = dependency.infrastructure.outputs.dockerRegistryPassword
+    strapi_admin_jwt_secret = dependency.appServiceAdmin.outputs.strapiJWT
 })
 
 terraform {

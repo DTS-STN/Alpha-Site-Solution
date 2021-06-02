@@ -11,7 +11,7 @@ dependency "infrastructure" {
 }
 
 dependency "appService" {
-  config_path = "../appService"
+  config_path = "../appservice"
 }
 
 inputs = merge({
@@ -25,6 +25,7 @@ inputs = merge({
     docker_registry = dependency.infrastructure.outputs.dockerRegistryLogin
     docker_registry_username = dependency.infrastructure.outputs.dockerRegistryUsername
     docker_registry_password = dependency.infrastructure.outputs.dockerRegistryPassword
+    keyvault_id = dependency.infrastructure.outputs.keyvaultID
 })
 
 terraform {

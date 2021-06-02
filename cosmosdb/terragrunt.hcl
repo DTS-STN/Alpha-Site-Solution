@@ -3,7 +3,11 @@ include {
 }
 
 dependency "resourceGroups" {
-  config_path = "../resourceGroups"
+  config_path = "../resourcegroups"
+}
+
+dependency "infrastructure" {
+  config_path = "../infrastructure"
 }
 
 inputs = merge({

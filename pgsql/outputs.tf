@@ -15,6 +15,10 @@ output "pgsql-server-name" {
     value = azurerm_postgresql_server.pgsql-server.name
 }
 
+output "pgsqlDbPass" {
+  value = azurerm_key_vault_secret.pgsql-db-pass.value
+}
+
 output "pgsql-db-name" {
     value = azurerm_postgresql_database.name
 }

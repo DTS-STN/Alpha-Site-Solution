@@ -38,3 +38,8 @@ resource "azurerm_cosmosdb_mongo_database" "cosmosdb-mongo" {
   throughput          = 400
 }
 
+resource "azurerm_key_vault_secret "cosmosdb-uri" {
+  name    = "mongo-uri"
+  value   = azurerm_cosmosdb_account.cosmosdb-account.connection_strings
+  key_vault_id = var.keyvault_id
+}

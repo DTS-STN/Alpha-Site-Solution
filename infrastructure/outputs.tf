@@ -1,9 +1,3 @@
-output "subnetName" {
-  value = azurerm_subnet.frontend.name
-}
-output "subnetName_secondary" {
-  value = azurerm_subnet.frontend_secondary.name
-}
 output "vnetId" {
   value = azurerm_virtual_network.appservice_vnet.id
 }
@@ -35,16 +29,13 @@ output "diagnosticStorageAccountId_secondary" {
   value = azurerm_storage_account.appservice-diagnostics-secondary.id
 }
 output "alphasiteStorageAccountName" {
-  value = azurerm_storage_account.alphasite-storageacct.name
+  value = azurerm_storage_account.storageacct.name
 }
 output "alphasiteStorageAccountKey" {
-  value = azurerm_storage_account.alphasite-storageacct.primary_access_key
+  value = azurerm_storage_account.storageacct.primary_access_key
 }
 output "alphasiteStorageAccountUrl" {
-  value = azurerm_storage_account.alphasite-storageacct.primary_blob_endpoint
-}
-output "pgsqlDbPass" {
-  value = azurerm_key_vault_secret.alphasite-pgsql-db-pass.value
+  value = azurerm_storage_account.storageacct.primary_blob_endpoint
 }
 output "dockerRegistryLogin" {
   value.azurerm_container_registry.acr.login_server

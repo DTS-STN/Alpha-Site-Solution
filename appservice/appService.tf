@@ -58,6 +58,8 @@ resource "azurerm_app_service" "app-service-primary" {
     "DOCKER_REGISTRY_SERVER_USERNAME" = var.docker_registry_username
     "DOCKER_REGISTRY_SERVER_PASSWORD" = var.docker_registry_password
     "SLOT_NAME"                       = "default"
+    "MONGO_URL"                       = var.mongo_uri
+    "MONGO_DB"                        = "researchpool"
 
   }
 
@@ -95,6 +97,8 @@ resource "azurerm_app_service" "app-service-secondary" {
     "DOCKER_REGISTRY_SERVER_USERNAME" = var.docker_registry_username
     "DOCKER_REGISTRY_SERVER_PASSWORD" = var.docker_registry_password
     "SLOT_NAME"                       = "default"
+    "MONGO_URL"                       = var.mongo_uri
+    "MONGO_DB"                        = "researchpool"
 
   }
 

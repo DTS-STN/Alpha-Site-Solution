@@ -1,3 +1,14 @@
+resource "random_password" "pgsql-db-pass" {
+  length = 16
+  special = false
+}
+
+resource "azurerm_key_vault_secret" "pgsql-db-pass" {
+  name     = "pgsql-db-pass"
+  value    = random_password.pgsql-db-pass.result
+  key_vault_id = var.keyvault_id
+}
+
 resource "azurerm_postgresql_server" "pgsql-server" {
   name                = "{var.application_name}-pgsql-server-${var.environment}"
   location            = var.location
@@ -11,7 +22,7 @@ resource "azurerm_postgresql_server" "pgsql-server" {
   auto_grow_enabled            = true
 
   administrator_login          = "alphasiteDbAdmin"
-  administrator_login_password = var.database_pass
+  administrator_login_password = azurerm_key_vault_secret.pgsql-db-pass.value
   version                      = "11"
   ssl_enforcement_enabled      = true
 }

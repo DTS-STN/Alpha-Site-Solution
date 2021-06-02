@@ -1,4 +1,3 @@
-
 resource "random_string" "storageName" {
   length           = 16
   special          = false
@@ -50,7 +49,7 @@ resource "azurerm_storage_account" "depot-storageacct" {
   }
 }
 
-resource "azurerm_storage_account" "alphasite-storageacct" {
+resource "azurerm_storage_account" "storageacct" {
   name                     = "${var.application_name}blobstorage${var.environment}
   resource_group_name      = var.depot_resource_group
   location                 = var.location
@@ -75,8 +74,8 @@ resource "azurerm_storage_account" "alphasite-storageacct" {
   }
 }
 
-resource "azurerm_storage_container" "alphasite-container" {
+resource "azurerm_storage_container" "container" {
   name                  = "alphasite"
-  storage_account_name  = azurerm_storage_account.alphasite-storageacct.name
+  storage_account_name  = azurerm_storage_account.storageacct.name
   container_access_type = "private"
 }

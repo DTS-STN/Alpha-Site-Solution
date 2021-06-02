@@ -56,14 +56,6 @@ variable "vnet_id_secondary" {
     type = string
     default = ""
 }
-variable "subnet_name" {
-    type = string
-    default = ""
-}
-variable "subnet_name_secondary" {
-    type = string
-    default = ""
-}
 variable "subnet_id" {
     type = string
     default = ""
@@ -207,11 +199,19 @@ variable "database_pass" {
     type = string
     default = ""
 }
+variable "api_port" {
+    type = number
+    default = 1337
+}
+variable "strapi_admin_jwt_secret"{
+    type = string
+    default = ""
+}
 variable "keyvault_id" {
     type = string
     default = ""
 }
-variable "cosmosdb_uri" {
+variable "mongo_uri" {
     type = string
     default = ""
 }
