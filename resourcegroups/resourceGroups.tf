@@ -1,19 +1,19 @@
 resource "azurerm_resource_group "network" {
-  name = var.network_resource_group
+  name = "${var.subscription_name}AlphasiteNetworkRG"
   location = var.location
 }
 
 resource "azurerm_resource_group "database" {
-  name = var.database_resource_group
+  name = "${var.subscription_name}AlphasiteDatabaseRG"
   location = var.location
 }
 
 resource "azurerm_resource_group "appService" {
-  name = var.appservice_resource_group
+  name = "${var.subscription_name}AlphasiteAppServiceRG"
   location = var.location
 }
 
 resource "azurerm_resource_group" "depot" {
-  name     = var.depot_resource_group
+  name     = "${var.subscription_name}AlphasiteDepotRG"
   location = var.location
 }
