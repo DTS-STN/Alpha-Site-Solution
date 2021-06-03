@@ -1,5 +1,5 @@
 resource "azurerm_application_gateway" "application-gateway-v2-primary" {
-  name                = "${var.application_appservice_name_primary}-ag-v2-primary"
+  name                = "ag-v2-primary"
   resource_group_name = var.network_resource_group
   location            = var.location
   enable_http2        = true
@@ -200,7 +200,7 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
 }
 
 resource "azurerm_application_gateway" "application-gateway-v2-secondary" {
-  name                = "${var.application_appservice_name_secondary}-ag-v2-secondary"
+  name                = "ag-v2-secondary"
   resource_group_name = var.network_resource_group
   location            = var.backup_location
   enable_http2        = true

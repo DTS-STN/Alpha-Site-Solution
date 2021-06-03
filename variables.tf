@@ -100,30 +100,6 @@ variable "secondary_application_appservice_hostname" {
     type = string
     default = ""
 }
-variable "application_appservice_name_primary" {
-    type = string
-    default = ""
-}
-variable "application_appservice_name_secondary" {
-    type = string
-    default = ""
-}
-variable "admin_appservice_name_primary" {
-    type = string
-    default = ""
-}
-variable "admin_appservice_name_secondary" {
-    type = string
-    default = ""
-}
-variable "api_appservice_name_primary" {
-    type = string
-    default = ""
-}
-variable "api_appservice_name_secondary" {
-    type = string
-    default = ""
-}
 variable "primary_api_appservice_hostname" {
     type = string
     default = ""
