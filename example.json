@@ -1,5 +1,6 @@
 {
     "subscription_id":"changeme",
+    "subscription_name": "changeme",
     "tenant_id":"changeme",
     "client_id":"%CLIENT_ID%",
     "client_secret":"%CLIENT_SECRET%",
@@ -7,7 +8,6 @@
     "application_name":"changeme",
     "healthcheck_page":"/",
     "relative_dns_name":"changeme",
-    "prefix": "changeme",
     "depot_resource_group":"changeme",
     "network_resource_group": "changeme",
     "database_resource_group": "changeme",

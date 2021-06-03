@@ -5,8 +5,8 @@ VARFILE=$1
 echo "Loading in variables from varfile"
 echo $VARFILE
 export TG_VAR_FILE=$VARFILE
-export prefix=$(cat $VARFILE | jq -r .prefix)
-export terraform_sp_name=$prefix-$(cat $VARFILE | jq -r .application_name)-terraform-sp
+export subscription_name=$(cat $VARFILE | jq -r .subscription_name)
+export terraform_sp_name=$subscription_name-$(cat $VARFILE | jq -r .application_name)-terraform-sp
 export subscription_id=$(cat $VARFILE | jq -r .subscription_id)
 export depot_resource_group=$(cat $VARFILE | jq -r .depot_resource_group)
 export location=$(cat $VARFILE | jq -r .location)

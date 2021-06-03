@@ -23,7 +23,7 @@ locals {
   client_id = local.vardata.client_id
   client_secret = local.vardata.client_secret
   depot_resource_group = local.vardata.depot_resource_group
-  storage_account_name = local.vardata.remote_state_storage_account_name
+  remote_state_storage_account_name = local.vardata.remote_state_storage_account_name
   container_name = local.vardata.application_name
 
 }
@@ -34,7 +34,7 @@ remote_state {
     config = {
         key = "${path_relative_to_include()}/terraform.tfstate"
         resource_group_name = local.depot_resource_group
-        storage_account_name = local.storage_account_name
+        storage_account_name = local.remote_state_storage_account_name
         container_name = local.container_name
     }
 }

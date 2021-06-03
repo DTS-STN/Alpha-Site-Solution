@@ -6,6 +6,9 @@ variable "client_id" {}
 variable "client_secret" {}
 
 #Infrastructure Settings
+variable "subscription_name" {
+    type = string
+}
 variable "location" {
     type = string
 }
@@ -30,15 +33,15 @@ variable "database_resource_group" {
 variable "remote_state_storage_account_name" {
     type = string
 }
-variable "storage_account_name" {
+variable "cms_storage_account_name" {
     type = string
     default = ""
 }
-variable "storage_account_key" {
+variable "cms_storage_account_key" {
     type = string
     default = ""
 }
-variable "storage_account_url" {
+variable "cms_storage_account_url" {
     type = string
     default = ""
 }

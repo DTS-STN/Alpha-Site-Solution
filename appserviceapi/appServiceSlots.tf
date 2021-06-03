@@ -35,9 +35,9 @@ resource "azurerm_app_service_slot" "app-service-api-primary" {
     "STRAPI_API_HOST" = "0.0.0.0" 
     "STRAPI_API_PORT" = var.api_port
     "STRAPI_STORAGE" = "azure"
-    "STORAGE_ACCOUNT" = var.storage_account_name
-    "STORAGE_ACCOUNT_KEY" = var.storage_account_key
-    "STORAGE_ACCOUNT_URL" = var.storage_account_url
+    "STORAGE_ACCOUNT" = var.cms_storage_account_name
+    "STORAGE_ACCOUNT_KEY" = var.cms_storage_account_key
+    "STORAGE_ACCOUNT_URL" = var.cms_storage_account_url
     "STORAGE_ACCOUNT_CONTAINER" = var.application_name
     "STRAPI_ADMIN_JWT_SECRET" = var.strapi_admin_jwt_secret
     "WEBSITES_PORT" = var.api_port
@@ -82,9 +82,9 @@ resource "azurerm_app_service_slot" "app-service-api-secondary" {
     "STRAPI_API_HOST" = "0.0.0.0" 
     "STRAPI_API_PORT" = var.api_port
     "STRAPI_STORAGE" = "azure"
-    "STORAGE_ACCOUNT" = var.storage_account_name
-    "STORAGE_ACCOUNT_KEY" = var.storage_account_key
-    "STORAGE_ACCOUNT_URL" = var.storage_account_url
+    "STORAGE_ACCOUNT" = var.cms_storage_account_name
+    "STORAGE_ACCOUNT_KEY" = var.cms_storage_account_key
+    "STORAGE_ACCOUNT_URL" = var.cms_storage_account_url
     "STORAGE_ACCOUNT_CONTAINER" = var.application_name
     "STRAPI_ADMIN_JWT_SECRET" = var.strapi_admin_jwt_secret
     "WEBSITES_PORT" = var.api_port

@@ -28,7 +28,7 @@ locals {
   client_id = local.vardata.client_id
   client_secret = local.vardata.client_secret
   depot_resource_group = local.vardata.depot_resource_group
-  storage_account_name = local.vardata.remote_state_storage_account_name
+  remote_state_storage_account_name = local.vardata.remote_state_storage_account_name
   container_name = local.vardata.application_name
 
 }
