@@ -215,3 +215,13 @@ variable "mongo_uri" {
     type = string
     default = ""
 }
+
+variable "primary_app_service_plan_id" {
+    type = string
+    default = ""
+}
+
+variable "secondary_app_service_plan_id" {
+    type = string
+    default = ""
+}
