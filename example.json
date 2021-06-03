@@ -7,7 +7,6 @@
     "application_name":"changeme",
     "healthcheck_page":"/",
     "relative_dns_name":"changeme",
-    "depot_resource_group":"changeme",
     "prefix": "changeme",
     "depot_resource_group":"changeme",
     "network_resource_group": "changeme",
