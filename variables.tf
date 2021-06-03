@@ -68,11 +68,11 @@ variable "public_ip_id_primary" {
     type = string
     default = ""
 }
-variable "primary_public_ip_fqdn" {
+variable "public_ip_id_secondary" {
     type = string
     default = ""
 }
-variable "public_ip_id_secondary" {
+variable "primary_public_ip_fqdn" {
     type = string
     default = ""
 }
@@ -215,12 +215,10 @@ variable "mongo_uri" {
     type = string
     default = ""
 }
-
 variable "primary_app_service_plan_id" {
     type = string
     default = ""
 }
-
 variable "secondary_app_service_plan_id" {
     type = string
     default = ""
