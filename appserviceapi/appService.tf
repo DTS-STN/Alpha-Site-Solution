@@ -46,8 +46,6 @@ resource "azurerm_app_service" "app-service-api-primary" {
     "STORAGE_ACCOUNT_URL" = var.cms_storage_account_url
     "STORAGE_ACCOUNT_CONTAINER" = var.application_name
     "STRAPI_ADMIN_JWT_SECRET" = var.strapi_admin_jwt_secret
-    "WEBSITES_PORT" = var.api_port
-
   }
 
 }
@@ -99,7 +97,6 @@ resource "azurerm_app_service" "app-service-api-secondary" {
     "STORAGE_ACCOUNT_URL" = var.cms_storage_account_url
     "STORAGE_ACCOUNT_CONTAINER" = var.application_name
     "STRAPI_ADMIN_JWT_SECRET" = var.strapi_admin_jwt_secret
-    "WEBSITES_PORT" = var.api_port
   }
 
 }
