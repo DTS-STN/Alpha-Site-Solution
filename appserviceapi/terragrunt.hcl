@@ -18,6 +18,10 @@ dependency "appServiceAdmin" {
   config_path = "../appserviceadmin"
 }
 
+dependency "pgsql" {
+  config_path = "../pgsql"
+}
+
 inputs = merge({
     appservice_resource_group   = dependency.resourceGroups.outputs.appServiceRgName
     location  = dependency.resourceGroups.outputs.location
