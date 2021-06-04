@@ -9,7 +9,7 @@ resource "azurerm_app_service" "app-service-api-primary" {
   site_config {
     always_on = "true"
 
-    linux_fx_version  = "DOCKER|${var.docker_registry}/${var.docker_container_api}" #define the images to use for your application
+    linux_fx_version  = "DOCKER|${var.docker_registry}/${var.api_docker_container}" #define the images to use for your application
 
     health_check_path = var.healthcheck_page # health check required in order that internal app service plan loadbalancer do not loadbalance on instance down
 
@@ -60,7 +60,7 @@ resource "azurerm_app_service" "app-service-api-secondary" {
   site_config {
     always_on = "true"
 
-    linux_fx_version  = "DOCKER|${var.docker_registry}/${var.docker_container_api}" #define the images to usecfor you application
+    linux_fx_version  = "DOCKER|${var.docker_registry}/${var.api_docker_container}" #define the images to usecfor you application
 
     health_check_path = var.healthcheck_page # health check required in order that internal app service plan loadbalancer do not loadbalance on instance down
 

@@ -132,6 +132,14 @@ variable "docker_container" {
     type = string
     default = ""
 }
+variable "api_docker_container" {
+    type = string
+    default = ""
+}
+variable "admin_docker_container" {
+    type = string
+    default = ""
+}
 variable "docker_registry_username" {
     type = string
     default = ""
