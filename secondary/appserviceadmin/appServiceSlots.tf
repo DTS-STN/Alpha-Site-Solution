@@ -6,12 +6,12 @@ resource "random_id" "server" {
   byte_length = 8
 }
 
-resource "azurerm_app_service_slot" "app-service-admin-primary" {
+resource "azurerm_app_service_slot" "app-service-admin-secondary" {
     name                    = random_id.server.hex
-    app_service_name        = azurerm_app_service.app-service-admin-primary.name
-    location                = var.location
+    app_service_name        = azurerm_app_service.app-service-admin-secondary.name
+    location                = var.backup_location
     resource_group_name     = var.appservice_resource_group
-    app_service_plan_id     = var.primary_app_service_plan_id
+    app_service_plan_id     = var.secondary_app_service_plan_id
     https_only              = true
     client_affinity_enabled = true
 
