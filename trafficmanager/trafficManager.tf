@@ -1,0 +1,35 @@
+# Create Traffic Manager API Profile
+resource "azurerm_traffic_manager_profile" "traffic-manager" {
+  name                   = "as-traffic-manager"
+  resource_group_name    = var.network_resource_group
+  traffic_routing_method = "Performance"
+
+  dns_config {
+    relative_name = var.relative_dns_name
+    ttl           = 300
+  }
+
+  monitor_config {
+    protocol = "https"
+    port     = 443
+    path     = var.healthcheck_page
+  }
+}
+
+
+resource "azurerm_traffic_manager_endpoint" "tm-endpoint-primary" {
+  name                = "tm-endpoint-primary"
+  resource_group_name = var.network_resource_group
+  profile_name        = azurerm_traffic_manager_profile.traffic-manager.name
+  type                = "externalEndpoints"
+  target              = var.primary_public_ip_fqdn
+  endpoint_location   = var.location
+}
+resource "azurerm_traffic_manager_endpoint" "tm-endpoint-secondary" {
+  name                = "tm-endpoint-secondary"
+  resource_group_name = var.network_resource_group
+  profile_name        = azurerm_traffic_manager_profile.traffic-manager.name
+  type                = "externalEndpoints"
+  target              = var.secondary_public_ip_fqdn
+  endpoint_location   = var.backup_location
+}
