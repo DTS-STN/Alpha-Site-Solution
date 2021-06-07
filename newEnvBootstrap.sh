@@ -38,7 +38,7 @@ sleep 30
 echo "Done"
 
 echo "Creating Resource Group..."
-az group create --name $depot_resource_group --location $location 
+az group create --name $subscription_name$depot_resource_group --location $location 
 echo "Done."
 echo "Creating Storage Account..."
 az storage account create \
