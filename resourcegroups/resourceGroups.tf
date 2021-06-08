@@ -1,19 +1,19 @@
-resource "azurerm_resource_group "network" {
-  name = "${var.subscription_name}AlphasiteNetworkRG"
+resource "azurerm_resource_group" "network" {
+  name = var.network_resource_group
   location = var.location
 }
 
-resource "azurerm_resource_group "database" {
-  name = "${var.subscription_name}AlphasiteDatabaseRG"
+resource "azurerm_resource_group" "database" {
+  name = var.database_resource_group
   location = var.location
 }
 
-resource "azurerm_resource_group "appService" {
-  name = "${var.subscription_name}AlphasiteAppServiceRG"
+resource "azurerm_resource_group" "appService" {
+  name = var.appservice_resource_group
   location = var.location
 }
 
 resource "azurerm_resource_group" "depot" {
-  name     = "${var.subscription_name}AlphasiteDepotRG"
+  name     = var.depot_resource_group
   location = var.location
 }

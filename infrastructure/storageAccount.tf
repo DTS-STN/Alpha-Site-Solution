@@ -50,7 +50,7 @@ resource "azurerm_storage_account" "depot-storageacct" {
 }
 
 resource "azurerm_storage_account" "storageacct" {
-  name                     = "${var.application_name}blobstorage${var.environment}
+  name                     = "${var.application_name}blobstorage${var.environment}"
   resource_group_name      = var.depot_resource_group
   location                 = var.location
   account_tier             = "Standard"

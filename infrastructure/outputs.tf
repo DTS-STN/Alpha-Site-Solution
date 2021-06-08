@@ -22,6 +22,19 @@ output "subnetId" {
 output "subnetId_secondary" {
   value = azurerm_subnet.frontend_secondary.id
 }
+output "dockerRegistryLogin" {
+  value = azurerm_container_registry.acr.login_server
+}
+output "dockerRegistryUsername" {
+  value = azurerm_container_registry.acr.admin_username
+}
+output "dockerRegistryPassword" {
+  value = azurerm_container_registry.acr.admin_password
+}
+output "keyvaultID" {
+  value = azurerm_key_vault.keyvault.id
+}
+
 output "diagnosticStorageAccountId" {
   value = azurerm_storage_account.appservice-diagnostics.id
 }
@@ -36,16 +49,4 @@ output "alphasiteStorageAccountKey" {
 }
 output "alphasiteStorageAccountUrl" {
   value = azurerm_storage_account.storageacct.primary_blob_endpoint
-}
-output "dockerRegistryLogin" {
-  value.azurerm_container_registry.acr.login_server
-}
-output "dockerRegistryUsername" {
-  value.azurerm_container_registry.acr.admin_username
-}
-output "dockerRegistryPassword" {
-  value.azurerm_container_registry.acr.admin_password
-}
-output "keyvaultID" {
-  value.azurerm_key_vault.keyvault.key_vault.id
 }
