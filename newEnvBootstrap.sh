@@ -23,22 +23,22 @@ rm -rfd $(find . -name \*.terraform -type d)
 rm  $(find . -name provider.tf -type f)
 echo "Done."
 
-echo "Creating Terraform Service Principal..."
-export terraform_sp_pass=$(az ad sp create-for-rbac --name $terraform_sp_name --role Contributor | grep password | cut -c16-49)
-export terraform_sp_id=$(az ad sp list --display-name $terraform_sp_name --query [].appId -o tsv)
-echo "Done."
+# echo "Creating Terraform Service Principal..."
+# export terraform_sp_pass=$(az ad sp create-for-rbac --name $terraform_sp_name --role Contributor | grep password | cut -c16-49)
+# export terraform_sp_id=$(az ad sp list --display-name $terraform_sp_name --query [].appId -o tsv)
+# echo "Done."
 
-echo "Setting Terraform SP ID and Pass in VarFile"
-sed -i "s/%CLIENT_ID%/$terraform_sp_id/g" $VARFILE
-sed -i "s/%CLIENT_SECRET%/$terraform_sp_pass/g" $VARFILE
-echo "Done"
+# echo "Setting Terraform SP ID and Pass in VarFile"
+# sed -i "s/%CLIENT_ID%/$terraform_sp_id/g" $VARFILE
+# sed -i "s/%CLIENT_SECRET%/$terraform_sp_pass/g" $VARFILE
+# echo "Done"
 
-echo "Waiting 30 seconds for SPs to Propogate"
-sleep 30
-echo "Done"
+# echo "Waiting 30 seconds for SPs to Propogate"
+# sleep 30
+# echo "Done"
 
 echo "Creating Resource Group..."
-az group create --name $subscription_name$depot_resource_group --location $location 
+az group create --name $depot_resource_group --location $location 
 echo "Done."
 echo "Creating Storage Account..."
 az storage account create \
@@ -54,7 +54,7 @@ az storage container create --account-name $remote_state_storage_account_name --
 echo "Done."
 
 echo "Importing Resource Group To Terraform..."
-pushd ./resourceGroups
+pushd ./resourcegroups
 terragrunt import azurerm_resource_group.depot /subscriptions/$subscription_id/resourceGroups/$depot_resource_group
 echo "Done."
 
