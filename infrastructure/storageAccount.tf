@@ -30,23 +30,6 @@ resource "azurerm_storage_account" "depot-storageacct" {
   location                 = var.location
   account_tier             = "Standard"
   account_replication_type = "GRS"
-
-  tags = {
-    Environment = var.environment_tag
-    Terraform = "True"
-    Branch = "Innovation, Information and Technology"
-    Classification = "Unclassified"
-    Directorate = "Business Solutions and Information Management"
-    ProjectName = "Digital Technology Solutions"
-    ProductOwner = "Dwayne Moore - Digital Technology Solutions"
-    RequesterEmail = "gocmts@gmail.com"
-    OvernightShutdown = false
-    Department = "Employment and Social Development Canada"
-    Division = ""
-    Section = ""
-    ProjectID = ""
-    CsdID = ""
-  }
 }
 
 resource "azurerm_storage_account" "storageacct" {
@@ -55,23 +38,6 @@ resource "azurerm_storage_account" "storageacct" {
   location                 = var.location
   account_tier             = "Standard"
   account_replication_type = "GRS"
-
-  tags = {
-    Environment = var.environment_tag
-    Terraform = "True"
-    Branch = "Innovation, Information and Technology"
-    Classification = "Unclassified"
-    Directorate = "Business Solutions and Information Management"
-    ProjectName = "Digital Technology Solutions"
-    ProductOwner = "Dwayne Moore - Digital Technology Solutions"
-    RequesterEmail = "gocmts@gmail.com"
-    OvernightShutdown = false
-    Department = "Employment and Social Development Canada"
-    Division = ""
-    Section = ""
-    ProjectID = ""
-    CsdID = ""
-  }
 }
 
 resource "azurerm_storage_container" "container" {
