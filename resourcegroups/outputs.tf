@@ -7,9 +7,6 @@ output "networkRgName" {
 output "databaseRgName" {
   value = azurerm_resource_group.database.name
 }
-output "depotRgName" {
-  value = azurerm_resource_group.depot.name
-}
 output "location" {
   value = azurerm_resource_group.appService.location
 }
