@@ -198,7 +198,11 @@ variable "keyvault_id" {
     type = string
     default = ""
 }
-variable "mongo_uri" {
+variable "MONGO_URL" {
+    type = string
+    default = ""
+}
+variable "MONGO_DB" {
     type = string
     default = ""
 }
