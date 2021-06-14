@@ -198,7 +198,11 @@ variable "keyvault_id" {
     type = string
     default = ""
 }
-variable "mongo_uri" {
+variable "MONGO_URL" {
+    type = string
+    default = ""
+}
+variable "MONGO_DB" {
     type = string
     default = ""
 }
@@ -207,6 +211,34 @@ variable "primary_app_service_plan_id" {
     default = ""
 }
 variable "secondary_app_service_plan_id" {
+    type = string
+    default = ""
+}
+variable "USER_SIGNUP_FRENCH_TEMPLATE_ID" {
+    type = string
+    default = ""
+}
+variable "USER_SIGNUP_ENGLISH_TEMPLATE_ID" {
+    type = string
+    default = ""
+}
+variable "USER_SIGNUP_ENABLED {
+    type = string
+    default = "true"
+}
+variable "NOTIFY_BASE_API_URL" {
+    type = string
+    default = ""
+}
+variable "NOTIFY_API_KEY" {
+    type = string
+    default = ""
+}
+variable "NOTIFY_REPORT_A_PROBLEM_EMAIL" {
+    type = string
+    default = ""
+}
+variable "NOTIFY_REPORT_A_PROBLEM_TEMPLATE_ID" {
     type = string
     default = ""
 }

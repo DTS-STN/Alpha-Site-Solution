@@ -24,7 +24,8 @@ inputs = merge({
     docker_registry = dependency.infrastructure.outputs.dockerRegistryLogin
     docker_registry_username = dependency.infrastructure.outputs.dockerRegistryUsername
     docker_registry_password = dependency.infrastructure.outputs.dockerRegistryPassword
-    mongo_uri = dependency.cosmosdb.outputs.mongoUri
+    MONGO_URL = dependency.cosmosdb.outputs.mongoUri
+    MONGO_DB =  dependency.cosmosdb.outputs.mongoDB
 })
 
 terraform {

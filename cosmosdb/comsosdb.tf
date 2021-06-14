@@ -4,6 +4,7 @@ resource "azurerm_cosmosdb_account" "cosmosdb-account" {
   resource_group_name = var.database_resource_group
   offer_type          = "Standard"
   kind                = "MongoDB"
+  mongo_server_version = "4.0"
 
   enable_automatic_failover = false
 
@@ -32,7 +33,7 @@ resource "azurerm_cosmosdb_account" "cosmosdb-account" {
 }
 
 resource "azurerm_cosmosdb_mongo_database" "cosmosdb-mongo" {
-  name                = "cosmosdb-mongo-${var.environment}"
+  name                = "researchpool"
   resource_group_name = var.database_resource_group
   account_name        = azurerm_cosmosdb_account.cosmosdb-account.name
   throughput          = 400
