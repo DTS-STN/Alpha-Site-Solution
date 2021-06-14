@@ -43,7 +43,6 @@ resource "azurerm_app_service_slot" "app-service-primary" {
         "NOTIFY_REPORT_A_PROBLEM_TEMPLATE_ID" = var.NOTIFY_REPORT_A_PROBLEM_TEMPLATE_ID
         "MONGO_URL"                       = var.MONGO_URL
         "MONGO_DB"                        = var.MONGO_DB
-
     }
 
 }
