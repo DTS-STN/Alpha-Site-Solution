@@ -1,6 +1,6 @@
 # Create App Service Plans
 resource "azurerm_app_service_plan" "app-service-plan-primary" {
-  name                = "asp-${var.environment}-${var.location}"
+  name                = "${var.application_name}-asp-${var.environment}"
   kind                = "Linux"
   reserved            = true
   location            = var.location
@@ -14,7 +14,7 @@ resource "azurerm_app_service_plan" "app-service-plan-primary" {
 
 # Create App Services
 resource "azurerm_app_service" "app-service-primary" {
-  name                = "as-${var.environment}-${var.location}"
+  name                = "${application_name}-appservice-${var.environment}"
   location            = var.location
   resource_group_name = var.appservice_resource_group
   app_service_plan_id = azurerm_app_service_plan.app-service-plan-primary.id
@@ -51,7 +51,7 @@ resource "azurerm_app_service" "app-service-primary" {
     "USER_SIGNUP_ENGLISH_TEMPLATE_ID" = var.USER_SIGNUP_ENGLISH_TEMPLATE_ID
     "NOTIFY_BASE_API_URL"             = var.NOTIFY_BASE_API_URL
     "NOTIFY_API_KEY"                  = var.NOTIFY_API_KEY
-    "NOTIFY_REPORT_A_PROBLEM_EMAIL"   = var.NOTIFY_REPORT_A_PROBLEM_EMAIL
+    "NEXT_PUBLIC_NOTIFY_REPORT_A_PROBLEM_EMAIL"   = var.NEXT_PUBLIC_NOTIFY_REPORT_A_PROBLEM_EMAIL
     "NOTIFY_REPORT_A_PROBLEM_TEMPLATE_ID" = var.NOTIFY_REPORT_A_PROBLEM_TEMPLATE_ID
     "MONGO_URL"                       = var.MONGO_URL
     "MONGO_DB"                        = var.MONGO_DB

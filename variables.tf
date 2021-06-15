@@ -234,7 +234,7 @@ variable "NOTIFY_API_KEY" {
     type = string
     default = ""
 }
-variable "NOTIFY_REPORT_A_PROBLEM_EMAIL" {
+variable "NEXT_PUBLIC_NOTIFY_REPORT_A_PROBLEM_EMAIL" {
     type = string
     default = ""
 }

@@ -1,13 +1,5 @@
-resource "random_id" "server" {
-  keepers = {
-    azi_id = 1
-  }
-
-  byte_length = 8
-}
-
 resource "azurerm_app_service_slot" "app-service-admin-primary" {
-    name                    = random_id.server.hex
+    name                    = "staging"
     app_service_name        = azurerm_app_service.app-service-admin-primary.name
     location                = var.location
     resource_group_name     = var.appservice_resource_group

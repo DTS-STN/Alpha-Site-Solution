@@ -1,13 +1,5 @@
-resource "random_id" "server" {
-  keepers = {
-    azi_id = 1
-  }
-
-  byte_length = 8
-}
-
 resource "azurerm_app_service_slot" "app-service-primary" {
-    name                    = random_id.server.hex
+    name                    = "staging"
     app_service_name        = azurerm_app_service.app-service-primary.name
     location                = var.location
     resource_group_name     = var.appservice_resource_group
@@ -39,7 +31,7 @@ resource "azurerm_app_service_slot" "app-service-primary" {
         "USER_SIGNUP_ENGLISH_TEMPLATE_ID" = var.USER_SIGNUP_ENGLISH_TEMPLATE_ID
         "NOTIFY_BASE_API_URL"             = var.NOTIFY_BASE_API_URL
         "NOTIFY_API_KEY"                  = var.NOTIFY_API_KEY
-        "NOTIFY_REPORT_A_PROBLEM_EMAIL"   = var.NOTIFY_REPORT_A_PROBLEM_EMAIL
+        "NEXT_PUBLIC_NOTIFY_REPORT_A_PROBLEM_EMAIL"   = var.NEXT_PUBLIC_NOTIFY_REPORT_A_PROBLEM_EMAIL
         "NOTIFY_REPORT_A_PROBLEM_TEMPLATE_ID" = var.NOTIFY_REPORT_A_PROBLEM_TEMPLATE_ID
         "MONGO_URL"                       = var.MONGO_URL
         "MONGO_DB"                        = var.MONGO_DB
