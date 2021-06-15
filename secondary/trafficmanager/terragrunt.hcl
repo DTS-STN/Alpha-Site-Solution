@@ -3,17 +3,17 @@ include {
 }
 
 dependency "resourceGroups" {
-  config_path = "../resourcegroups"
+  config_path = "../../resourcegroups"
 }
 
 dependency "infrastructure" {
-  config_path = "../infrastructure"
+  config_path = "../../infrastructure"
 }
 
 inputs = merge({
     network_resource_group   = dependency.resourceGroups.outputs.networkRgName
     location  = dependency.resourceGroups.outputs.location
-    primary_public_ip_fqdn = dependency.infrastructure.outputs.publicIpFqdn_primary
+    secondary_public_ip_fqdn = dependency.infrastructure.outputs.publicIpFqdn_secondary
 })
 
 terraform {

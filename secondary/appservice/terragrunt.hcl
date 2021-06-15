@@ -3,27 +3,28 @@ include {
 }
 
 dependency "resourceGroups" {
-  config_path = "../resourcegroups"
+  config_path = "../../resourcegroups"
 }
 
 dependency "infrastructure" {
-  config_path = "../infrastructure"
+  config_path = "../../infrastructure"
 }
 
-dependency "appService" {
-  config_path = "../appservice"
+dependency "cosmosdb" {
+  config_path = "../../cosmosdb"
 }
 
 inputs = merge({
     appservice_resource_group   = dependency.resourceGroups.outputs.appServiceRgName
     location  = dependency.resourceGroups.outputs.location
     subnet_id   = dependency.infrastructure.outputs.subnetId
+    subnet_id_secondary   = dependency.infrastructure.outputs.subnetId_secondary
     diagnostic_storage_account_id = dependency.infrastructure.outputs.diagnosticStorageAccountId
-    primary_app_service_plan_id = dependency.appService.outputs.primaryAppServicePlanId
+    secondary_diagnostic_storage_account_id = dependency.infrastructure.outputs.diagnosticStorageAccountId_secondary
     docker_registry = dependency.infrastructure.outputs.dockerRegistryLogin
     docker_registry_username = dependency.infrastructure.outputs.dockerRegistryUsername
     docker_registry_password = dependency.infrastructure.outputs.dockerRegistryPassword
-    keyvault_id = dependency.infrastructure.outputs.keyvaultID
+    mongo_uri = dependency.cosmosdb.outputs.mongoUri
 })
 
 terraform {
@@ -46,5 +47,5 @@ terraform {
 
 locals {
   varfile = "${get_parent_terragrunt_dir()}/${get_env("TG_VAR_FILE")}"
-  vardata = local.varfile != null ? jsondecode(file(local.varfile)) : { } # some default
+  vardata = local.varfile != null ? jsondecode(file(local.varfile)) : {  } # some default
 }

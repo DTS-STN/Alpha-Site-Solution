@@ -1,7 +1,7 @@
-resource "azurerm_application_gateway" "application-gateway-v2-primary" {
-  name                = "ag-v2-primary"
+resource "azurerm_application_gateway" "application-gateway-v2-secondary" {
+  name                = "ag-v2-secondary"
   resource_group_name = var.network_resource_group
-  location            = var.location
+  location            = var.backup_location
   enable_http2        = true
 
 
@@ -32,7 +32,7 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
 
   gateway_ip_configuration {
     name      = "subnet"
-    subnet_id = var.subnet_id
+    subnet_id = var.subnet_id_secondary
   }
 
   frontend_port {
@@ -42,23 +42,23 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
 
   frontend_ip_configuration {
     name                 = "frontend"
-    public_ip_address_id = var.public_ip_id_primary
+    public_ip_address_id = var.public_ip_id_secondary
   }
 
   backend_address_pool {
     name        = "alphasiteApplicationPool"
-    fqdns       = [var.primary_application_appservice_hostname]
+    fqdns       = [var.secondary_application_appservice_hostname]
   }
 
   backend_address_pool {
     name        = "alphasiteApiPool"
-    fqdns       = [var.primary_api_appservice_hostname]
+    fqdns       = [var.secondary_api_appservice_hostname]
   }
 
   backend_address_pool {
     name        = "alphasiteAdminPool"
-    fqdns       = [var.primary_admin_appservice_hostname]
-  }
+    fqdns       = [var.secondary_admin_appservice_hostname]
+  }  
 
   http_listener {
     name                           = "alphasiteApiListener"
@@ -79,7 +79,7 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     host_name                      = var.application_url
     require_sni                    = "true"
   }
-
+  
   http_listener {
     name                           = "alphasiteAdminListener"
     frontend_ip_configuration_name = "frontend"
@@ -99,7 +99,7 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     name                = "application-probe"
     protocol            = "https"
     path                = var.healthcheck_page
-    host                = var.primary_application_appservice_hostname
+    host                = var.secondary_application_appservice_hostname
     interval            = "30"
     timeout             = "30"
     unhealthy_threshold = "3"
@@ -109,7 +109,7 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     name                = "api-probe"
     protocol            = "https"
     path                = var.healthcheck_page
-    host                = var.primary_api_appservice_hostname
+    host                = var.secondary_api_appservice_hostname
     interval            = "30"
     timeout             = "30"
     unhealthy_threshold = "3"
@@ -119,7 +119,7 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     name                = "admin-probe"
     protocol            = "https"
     path                = var.healthcheck_page
-    host                = var.primary_admin_appservice_hostname
+    host                = var.secondary_admin_appservice_hostname
     interval            = "30"
     timeout             = "30"
     unhealthy_threshold = "3"
@@ -146,7 +146,7 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     pick_host_name_from_backend_address = true
     affinity_cookie_name  = "ApplicationGatewayAffinity"
   }
-  
+
   backend_http_settings {
     name                  = "admin-https"
     cookie_based_affinity = "Disabled"
@@ -196,5 +196,4 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     backend_http_settings_name = "admin-https"
     rewrite_rule_set_name = "CORS"
   } 
-
 }

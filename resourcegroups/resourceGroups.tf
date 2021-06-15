@@ -14,6 +14,6 @@ resource "azurerm_resource_group" "appService" {
 }
 
 resource "azurerm_resource_group" "depot" {
-  name     = var.depot_resource_group
+  name = var.depot_resource_group
   location = var.location
 }

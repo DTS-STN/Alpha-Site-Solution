@@ -3,18 +3,14 @@ include {
 }
 
 dependency "resourceGroups" {
-  config_path = "../resourcegroups"
+  config_path = "../../resourcegroups"
 }
 
-dependency "infrastructure" {
-  config_path = "../infrastructure"
-}
-
-inputs = merge({
-    network_resource_group   = dependency.resourceGroups.outputs.networkRgName
-    location  = dependency.resourceGroups.outputs.location
-    primary_public_ip_fqdn = dependency.infrastructure.outputs.publicIpFqdn_primary
-})
+inputs = merge(
+  {
+    network_resource_group = dependency.resourceGroups.outputs.networkRgName
+  }
+)
 
 terraform {
   extra_arguments "common_vars" {
@@ -37,4 +33,11 @@ terraform {
 locals {
   varfile = "${get_parent_terragrunt_dir()}/${get_env("TG_VAR_FILE")}"
   vardata = local.varfile != null ? jsondecode(file(local.varfile)) : {  } # some default
+  subscription_id = local.vardata.subscription_id
+  tenant_id = local.vardata.tenant_id
+  client_id = local.vardata.client_id
+  client_secret = local.vardata.client_secret
+  depot_resource_group = local.vardata.depot_resource_group
+  remote_state_storage_account_name = local.vardata.remote_state_storage_account_name
+  container_name = local.vardata.application_name
 }

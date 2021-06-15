@@ -10,7 +10,8 @@ export terraform_sp_name=$subscription_name-$(cat $VARFILE | jq -r .application_
 export subscription_id=$(cat $VARFILE | jq -r .subscription_id)
 export depot_resource_group=$(cat $VARFILE | jq -r .depot_resource_group)
 export location=$(cat $VARFILE | jq -r .location)
-export remote_state_storage_account_name=$(cat $VARFILE | jq -r .remote_state_storage_account_name)
+export remote_state_storage_account_name=$(cat $VARFILE | jq -r .subscription_name)TFStorage
+export tfstate_storage_rg=$(cat $VARFILE | jq -r .subscription_name)TFStateRG
 export application_name=$(cat $VARFILE | jq -r .application_name)
 echo $terraform_sp_name
 
@@ -18,52 +19,10 @@ echo $terraform_sp_name
 echo "Setting account"
 az account set --subscription $subscription_id
 
-echo "Cleaning Workspace"
-rm -rfd $(find . -name \*.terraform -type d)
-rm  $(find . -name provider.tf -type f)
-echo "Done."
-
-# echo "Creating Terraform Service Principal..."
-# export terraform_sp_pass=$(az ad sp create-for-rbac --name $terraform_sp_name --role Contributor | grep password | cut -c16-49)
-# export terraform_sp_id=$(az ad sp list --display-name $terraform_sp_name --query [].appId -o tsv)
-# echo "Done."
-
-# echo "Setting Terraform SP ID and Pass in VarFile"
-# sed -i "s/%CLIENT_ID%/$terraform_sp_id/g" $VARFILE
-# sed -i "s/%CLIENT_SECRET%/$terraform_sp_pass/g" $VARFILE
-# echo "Done"
-
-# echo "Waiting 30 seconds for SPs to Propogate"
-# sleep 30
-# echo "Done"
-
-echo "Creating Resource Group..."
-az group create --name $depot_resource_group --location $location 
-echo "Done."
-echo "Creating Storage Account..."
-az storage account create \
-    --name $remote_state_storage_account_name \
-    --resource-group $depot_resource_group \
-    --location $location \
-    --sku Standard_RAGRS \
-    --kind StorageV2
-export AZURE_STORAGE_KEY=$(az storage account keys list -g $depot_resource_group -n $remote_state_storage_account_name --query [0].value -o tsv)
-echo "Done."
-echo "Creating TFState Container In Storage Account..."
+export AZURE_STORAGE_KEY=$(az storage account keys list -g $tfstate_storage_rg -n $remote_state_storage_account_name --query [0].value -o tsv)
 az storage container create --account-name $remote_state_storage_account_name --name $application_name --auth-mode key
-echo "Done."
 
-echo "Importing Resource Group To Terraform..."
-pushd ./resourcegroups
-terragrunt import azurerm_resource_group.depot /subscriptions/$subscription_id/resourceGroups/$depot_resource_group
-echo "Done."
+sed -i "s/%REMOTE_STATE_STORAGE_ACCOUNT_NAME%/$remote_state_storage_account_name/g" $VARFILE
+sed -i "s/%TFSTATE_STORAGE_RG%/$tfstate_storage_rg/g" $VARFILE
 
-echo "Creating Remaining Resource Groups..."
-terragrunt apply --auto-approve 
-popd
-echo "Done."
-
-echo "Importing Storage Account To Terraform..."
-pushd ./infrastructure
-terragrunt import azurerm_storage_account.depot-storageacct /subscriptions/$subscription_id/resourceGroups/$depot_resource_group/providers/Microsoft.Storage/storageAccounts/$remote_state_storage_account_name
 echo "Done."

@@ -1,7 +1,7 @@
-resource "azurerm_monitor_diagnostic_setting" "as-api-primary-diagnostics" {
-  name               = "api-diagnostics-${var.location}"
-  target_resource_id = azurerm_app_service.app-service-api-primary.id
-  storage_account_id = var.diagnostic_storage_account_id
+resource "azurerm_monitor_diagnostic_setting" "as-secondary-diagnostics" {
+  name               = "diagnostics-${var.environment}-${var.backup_location}"
+  target_resource_id = azurerm_app_service.app-service-secondary.id
+  storage_account_id = var.secondary_diagnostic_storage_account_id
 
 
 
