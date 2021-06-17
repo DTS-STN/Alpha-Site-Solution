@@ -8,8 +8,10 @@
     "tfstate_storage_rg": "%TFSTATE_STORAGE_RG%",
     "application_name":"alphasite",
     "healthcheck_page":"/",
-    "relative_dns_name":"alphasite",
     "depot_resource_group":"AlphasiteDepotRG",
+    "network_resource_group":"AlphasiteNetworkRG",
+    "database_resource_group":"AlphasiteDatabaseRG",
+    "appservice_resource_group":"AlphasiteAppserviceRG",
     "docker_container":"changeme",
     "api_docker_container":"changeme",
     "admin_docker_container":"changeme",
@@ -19,5 +21,13 @@
     "admin_url":"changeme",
     "location":"CanadaCentral",
     "backup_location":"CanadaEast",
-    "domain_wildcard": "changeme"
+    "domain_wildcard": "changeme",
+    "USER_SIGNUP_ENABLED": "true",
+    "USER_SIGNUP_FRENCH_TEMPLATE_ID":"changeme",
+    "USER_SIGNUP_ENGLISH_TEMPLATE_ID":"changeme",
+    "NOTIFY_BASE_API_URL":"changeme",
+    "NOTIFY_API_KEY":"changeme",
+    "NEXT_PUBLIC_NOTIFY_REPORT_A_PROBLEM_EMAIL":"changeme",
+    "NOTIFY_REPORT_A_PROBLEM_TEMPLATE_ID":"changeme",
+    "MONGO_URL": "changeme"
 }

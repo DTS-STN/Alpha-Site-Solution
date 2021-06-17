@@ -222,7 +222,7 @@ variable "USER_SIGNUP_ENGLISH_TEMPLATE_ID" {
     type = string
     default = ""
 }
-variable "USER_SIGNUP_ENABLED {
+variable "USER_SIGNUP_ENABLED" {
     type = string
     default = "true"
 }

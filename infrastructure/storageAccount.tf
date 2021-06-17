@@ -11,27 +11,6 @@ resource "azurerm_storage_account" "appservice-diagnostics" {
   account_replication_type = "GRS"
 }
 
-resource "random_string" "storageName-secondary" {
-  length           = 16
-  special          = false
-}
-
-resource "azurerm_storage_account" "appservice-diagnostics-secondary" {
-  name                     = lower(random_string.storageName-secondary.result)
-  resource_group_name      = var.depot_resource_group
-  location                 = var.backup_location
-  account_tier             = "Standard"
-  account_replication_type = "GRS"
-}
-
-resource "azurerm_storage_account" "depot-storageacct" {
-  name                     = var.remote_state_storage_account_name
-  resource_group_name      = var.depot_resource_group
-  location                 = var.location
-  account_tier             = "Standard"
-  account_replication_type = "GRS"
-}
-
 resource "azurerm_storage_account" "storageacct" {
   name                     = "${var.application_name}blobstorage${var.environment}"
   resource_group_name      = var.depot_resource_group

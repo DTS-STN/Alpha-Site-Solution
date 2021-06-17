@@ -22,7 +22,7 @@ locals {
   tenant_id = local.vardata.tenant_id
   client_id = local.vardata.client_id
   client_secret = local.vardata.client_secret
-  depot_resource_group = local.vardata.depot_resource_group
+  depot_resource_group = local.vardata.tfstate_storage_rg
   remote_state_storage_account_name = local.vardata.remote_state_storage_account_name
   container_name = local.vardata.application_name
 
