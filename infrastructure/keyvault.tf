@@ -8,7 +8,7 @@ resource "azurerm_key_vault" "keyvault" {
 
   access_policy {
     tenant_id    = var.tenant_id
-    object_id    = var.client_id
+    object_id    = var.client_object_id
     key_permissions = [
       "Get",
       "List",
