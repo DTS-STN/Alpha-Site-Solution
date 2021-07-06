@@ -10,7 +10,7 @@ resource "azurerm_key_vault_secret" "pgsql-db-pass" {
 }
 
 resource "azurerm_postgresql_server" "pgsql-server" {
-  name                = "{var.application_name}-pgsql-server-${var.environment}"
+  name                = "${var.application_name}-pgserver-${var.environment}"
   location            = var.location
   resource_group_name = var.database_resource_group
 

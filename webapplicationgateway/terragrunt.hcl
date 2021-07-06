@@ -23,21 +23,13 @@ inputs = merge({
   network_resource_group  = dependency.resourceGroups.outputs.networkRgName
   location  = dependency.resourceGroups.outputs.location
   subnet_id   = dependency.infrastructure.outputs.subnetId
-  subnet_id_secondary   = dependency.infrastructure.outputs.subnetId_secondary
   vnet_id  = dependency.infrastructure.outputs.vnetId
-  vnet_id_secondary  = dependency.infrastructure.outputs.vnetId_secondary
   primary_public_ip_fqdn = dependency.infrastructure.outputs.publicIpFqdn_primary
-  secondary_public_ip_fqdn = dependency.infrastructure.outputs.publicIpFqdn_secondary
   public_ip_id_primary = dependency.infrastructure.outputs.publicIpId_primary
-  public_ip_id_secondary = dependency.infrastructure.outputs.publicIpId_secondary
   primary_application_appservice_hostname = dependency.appService.outputs.primaryAppServiceHostname
-  secondary_application_appservice_hostname = dependency.appService.outputs.secondaryAppServiceHostname
   primary_admin_appservice_hostname = dependency.appServiceAdmin.outputs.primaryAdminAppServiceHostname
-  secondary_admin_appservice_hostname = dependency.appServiceAdmin.outputs.secondaryAdminAppServiceHostname
   primary_api_appservice_hostname = dependency.appServiceAPI.outputs.primaryApiAppServiceHostname
-  secondary_api_appservice_hostname = dependency.appServiceAPI.outputs.secondaryApiAppServiceHostname
   diagnostic_storage_account_id  = dependency.infrastructure.outputs.diagnosticStorageAccountId
-  secondary_diagnostic_storage_account_id = dependency.infrastructure.outputs.diagnosticStorageAccountId_secondary
 })
 
 terraform {

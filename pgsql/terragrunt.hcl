@@ -10,14 +10,11 @@ dependency "infrastructure" {
   config_path = "../infrastructure"
 }
 
-inpts = merge({  
+inputs = merge({
   resource_group_name   = dependency.resourceGroups.outputs.databaseRgName
   location  = dependency.resourceGroups.outputs.location
-  subnet_id   = dependency.infrastructure.outputs.databasePass
-  subnet_id_secondary   = dependency.infrastructure.outputs.subnetId_secondary
   diagnostic_storage_account_id = dependency.infrastructure.outputs.diagnosticStorageAccountId
-  secondary_diagnostic_storage_account_id = dependency.infrastructure.outputs.diagnosticStorageAccountId_secondary
-  database_pass = dependency.infrastructure.outputs.pgsqlDbPass
+  keyvault_id = dependency.infrastructure.outputs.keyvaultID
 })
 
 

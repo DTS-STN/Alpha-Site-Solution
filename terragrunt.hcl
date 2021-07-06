@@ -18,11 +18,8 @@ EOF
 locals {
   varfile = get_env("TG_VAR_FILE")
   vardata = local.varfile != null ? jsondecode(file(local.varfile)) : {  } # some default
-  subscription_id = local.vardata.subscription_id
-  tenant_id = local.vardata.tenant_id
-  client_id = local.vardata.client_id
-  client_secret = local.vardata.client_secret
-  depot_resource_group = local.vardata.depot_resource_group
+
+  depot_resource_group = local.vardata.tfstate_storage_rg
   remote_state_storage_account_name = local.vardata.remote_state_storage_account_name
   container_name = local.vardata.application_name
 

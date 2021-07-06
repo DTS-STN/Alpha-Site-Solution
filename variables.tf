@@ -4,12 +4,19 @@ variable "subscription_id" {}
 variable "tenant_id" {}
 variable "client_id" {}
 variable "client_secret" {}
+variable "client_object_id" {}
 
 #Infrastructure Settings
 variable "subscription_name" {
     type = string
 }
 variable "location" {
+    type = string
+}
+variable "tfstate_storage_rg" {
+    type = string
+}
+variable "terraform_sp_name" {
     type = string
 }
 variable "backup_location" {
@@ -222,7 +229,7 @@ variable "USER_SIGNUP_ENGLISH_TEMPLATE_ID" {
     type = string
     default = ""
 }
-variable "USER_SIGNUP_ENABLED {
+variable "USER_SIGNUP_ENABLED" {
     type = string
     default = "true"
 }
