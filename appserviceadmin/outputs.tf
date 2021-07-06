@@ -3,4 +3,5 @@ output "primaryAdminAppServiceHostname" {
 }
 output "strapiJWT" {
   value = azurerm_key_vault_secret.strapi-admin-jwt-secret.value
+  sensitive = true
 }
