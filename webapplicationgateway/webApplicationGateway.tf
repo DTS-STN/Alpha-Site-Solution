@@ -22,11 +22,11 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     }
     disabled_rule_group {
       rule_group_name = "REQUEST-941-APPLICATION-ATTACK-XSS"
-      rules = [941150]
+      rules = [941150,941330,941340]
     }
     disabled_rule_group {
       rule_group_name = "REQUEST-942-APPLICATION-ATTACK-SQLI"
-      rules = [942200,942260,942340,942430,942330,942370]
+      rules = [942190,942200,942260,942340,942430,942330,942370]
     }
   }
 
