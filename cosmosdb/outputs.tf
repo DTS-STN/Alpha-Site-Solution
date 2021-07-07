@@ -1,5 +1,5 @@
 output "mongoUri" {
-   value = azurerm_cosmosdb_account.cosmosdb-account.connection_strings
+   value = azurerm_key_vault_secret.cosmosdb-uri.value
    sensitive   = true
 }
 
