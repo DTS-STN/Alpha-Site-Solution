@@ -20,5 +20,5 @@ output "pgsqlDbPass" {
 }
 
 output "pgsql-db-name" {
-    value = azurerm_postgresql_database.pgsql-db
+    value = azurerm_postgresql_database.pgsql-db.name
 }

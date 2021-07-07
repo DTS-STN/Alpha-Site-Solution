@@ -30,6 +30,12 @@ resource "azurerm_cosmosdb_account" "cosmosdb-account" {
     location          = var.location
     failover_priority = 0
   }
+
+  backup {
+    type = "Periodic"
+    interval_in_minutes = 720
+    retention_in_hours = 720
+  }
 }
 
 resource "azurerm_cosmosdb_mongo_database" "cosmosdb-mongo" {

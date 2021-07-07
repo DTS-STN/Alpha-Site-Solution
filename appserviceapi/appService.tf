@@ -34,7 +34,7 @@ resource "azurerm_app_service" "app-service-api-primary" {
     "DATABASE_HOST" = var.database_host
     "DATABASE_PORT" = var.database_port
     "DATABASE_NAME" = var.database_name
-    "DATABASE_USERNAME" = var.database_login
+    "DATABASE_USERNAME" = "${var.database_login}@${var.database_server}"
     "DATABASE_PASSWORD" = var.database_pass
     "DATABASE_SSL" = true
     "STRAPI_API_BACKEND_URL" = var.api_url
