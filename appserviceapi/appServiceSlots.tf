@@ -3,7 +3,7 @@ resource "azurerm_app_service_slot" "app-service-api-primary" {
     app_service_name        = azurerm_app_service.app-service-api-primary.name
     location                = var.location
     resource_group_name     = var.appservice_resource_group
-    app_service_plan_id     = var.primary_app_service_plan_id
+    app_service_plan_id     = var.admin_app_service_plan_id
     https_only              = true
     client_affinity_enabled = true
 
