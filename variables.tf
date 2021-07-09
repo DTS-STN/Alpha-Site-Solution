@@ -213,7 +213,7 @@ variable "MONGO_DB" {
     type = string
     default = ""
 }
-variable "primary_app_service_plan_id" {
+variable "admin_app_service_plan_id" {
     type = string
     default = ""
 }

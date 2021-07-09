@@ -19,7 +19,6 @@ inputs = merge({
     location  = dependency.resourceGroups.outputs.location
     subnet_id   = dependency.infrastructure.outputs.subnetId
     diagnostic_storage_account_id = dependency.infrastructure.outputs.diagnosticStorageAccountId
-    primary_app_service_plan_id = dependency.appService.outputs.primaryAppServicePlanId
     docker_registry = dependency.infrastructure.outputs.dockerRegistryLogin
     docker_registry_username = dependency.infrastructure.outputs.dockerRegistryUsername
     docker_registry_password = dependency.infrastructure.outputs.dockerRegistryPassword
