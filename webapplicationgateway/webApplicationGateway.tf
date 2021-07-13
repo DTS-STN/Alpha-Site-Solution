@@ -1,5 +1,5 @@
 resource "azurerm_application_gateway" "application-gateway-v2-primary" {
-  name                = "ag-v2-primary"
+  name                = "ag-v2-primary-${var.environment}"
   resource_group_name = var.network_resource_group
   location            = var.location
   enable_http2        = true

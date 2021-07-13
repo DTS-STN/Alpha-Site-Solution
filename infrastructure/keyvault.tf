@@ -1,5 +1,5 @@
 resource "azurerm_key_vault" "keyvault" {
-  name                        = "${var.subscription_name}-Keyvault"
+  name                        = "${var.subscription_name}-Keyvault-${var.environment}"
   location                    = var.location
   resource_group_name         = var.depot_resource_group
   tenant_id                   = var.tenant_id
