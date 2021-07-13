@@ -229,6 +229,14 @@ variable "USER_SIGNUP_ENGLISH_TEMPLATE_ID" {
     type = string
     default = ""
 }
+variable "USER_UNSUBSCRIBE_FRENCH_TEMPLATE_ID" {
+    type = string
+    default = ""
+}
+variable "USER_UNSUBSCRIBE_ENGLISH_TEMPLATE_ID" {
+    type = string
+    default = ""
+}
 variable "USER_SIGNUP_ENABLED" {
     type = string
     default = "true"
