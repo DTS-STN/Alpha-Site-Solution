@@ -12,7 +12,7 @@ resource "azurerm_storage_account" "appservice-diagnostics" {
 }
 
 resource "azurerm_storage_account" "storageacct" {
-  name                     = "${var.application_name}sa{var.environment}"
+  name                     = "${var.application_name}sa${var.environment}"
   resource_group_name      = var.depot_resource_group
   location                 = var.location
   account_tier             = "Standard"
