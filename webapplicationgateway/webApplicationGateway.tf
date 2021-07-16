@@ -1,5 +1,5 @@
 resource "azurerm_application_gateway" "application-gateway-v2-primary" {
-  name                = "ag-v2-primary-${var.environment}"
+  name                = "ag-v2-primary"
   resource_group_name = var.network_resource_group
   location            = var.location
   enable_http2        = true
@@ -40,28 +40,33 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     port = 443
   }
 
+  frontend_port {
+    name = "http"
+    port = 80
+  }
+
   frontend_ip_configuration {
     name                 = "frontend"
     public_ip_address_id = var.public_ip_id_primary
   }
 
   backend_address_pool {
-    name        = "alphasiteApplicationPool"
+    name        = "${var.application_name}ApplicationPool"
     fqdns       = [var.primary_application_appservice_hostname]
   }
 
   backend_address_pool {
-    name        = "alphasiteApiPool"
+    name        = "${var.application_name}ApiPool"
     fqdns       = [var.primary_api_appservice_hostname]
   }
 
   backend_address_pool {
-    name        = "alphasiteAdminPool"
+    name        = "${var.application_name}AdminPool"
     fqdns       = [var.primary_admin_appservice_hostname]
   }
 
   http_listener {
-    name                           = "alphasiteApiListener"
+    name                           = "${var.application_name}ApiListener"
     frontend_ip_configuration_name = "frontend"
     frontend_port_name             = "https"
     protocol                       = "Https"
@@ -69,9 +74,17 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     host_name                      = var.api_url
     require_sni                    = "true"
   }
+  http_listener {
+    name                           = "${var.application_name}ApiHTTPListener"
+    frontend_ip_configuration_name = "frontend"
+    frontend_port_name             = "http"
+    protocol                       = "Http"
+    host_name                      = var.api_url
+    require_sni                    = false
+  }
 
   http_listener {
-    name                           = "alphasiteApplicationListener"
+    name                           = "${var.application_name}ApplicationListener"
     frontend_ip_configuration_name = "frontend"
     frontend_port_name             = "https"
     protocol                       = "Https"
@@ -79,15 +92,31 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     host_name                      = var.application_url
     require_sni                    = "true"
   }
+  http_listener {
+    name                           = "${var.application_name}ApplicationHTTPListener"
+    frontend_ip_configuration_name = "frontend"
+    frontend_port_name             = "http"
+    protocol                       = "Http"
+    host_name                      = var.application_url
+    require_sni                    = false
+  }
 
   http_listener {
-    name                           = "alphasiteAdminListener"
+    name                           = "${var.application_name}AdminListener"
     frontend_ip_configuration_name = "frontend"
     frontend_port_name             = "https"
     protocol                       = "Https"
     ssl_certificate_name           = "dts-stn-wildcard"
     host_name                      = var.admin_url
     require_sni                    = "true"
+  }
+  http_listener {
+    name                           = "${var.application_name}AdminHTTPListener"
+    frontend_ip_configuration_name = "frontend"
+    frontend_port_name             = "http"
+    protocol                       = "Http"
+    host_name                      = var.admin_url
+    require_sni                    = false
   }
 
   ssl_certificate {
@@ -146,7 +175,7 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     pick_host_name_from_backend_address = true
     affinity_cookie_name  = "ApplicationGatewayAffinity"
   }
-  
+
   backend_http_settings {
     name                  = "admin-https"
     cookie_based_affinity = "Disabled"
@@ -159,42 +188,84 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
   }
 
   rewrite_rule_set {
-    name = "CORS" 
-      rewrite_rule {
-        name = "allow-origin"
-        rule_sequence = 100
-          response_header_configuration {
-            header_name  = "Access-Control-Allow-Origin"
-            header_value = "*"
+    name = "CORS"
+    rewrite_rule {
+      name = "allow-origin"
+      rule_sequence = 100
+      response_header_configuration {
+        header_name  = "Access-Control-Allow-Origin"
+        header_value = "*"
       }
     }
   }
 
+  redirect_configuration {
+    name                       = "${var.application_name}ApplicationHTTPRule"
+    include_path               = "true"
+    include_query_string       = "true"
+    target_listener_name       = "${var.application_name}ApplicationListener"
+    redirect_type              = "Permanent"
+  }
   request_routing_rule {
-    name                       = "alphasiteApplicationRule"
+    name                       = "${var.application_name}ApplicationHTTPRule"
+    http_listener_name         = "${var.application_name}ApplicationHTTPListener"
+    redirect_configuration_name = "${var.application_name}ApplicationHTTPRule"
+    rule_type                   = "Basic"
+  }
+  request_routing_rule {
+    name                       = "${var.application_name}ApplicationRule"
     rule_type                  = "Basic"
-    http_listener_name         = "alphasiteApplicationListener"
-    backend_address_pool_name  = "alphasiteApplicationPool"
+    http_listener_name         = "${var.application_name}ApplicationListener"
+    backend_address_pool_name  = "${var.application_name}ApplicationPool"
     backend_http_settings_name = "application-https"
     rewrite_rule_set_name = "CORS"
   }
 
+
+  redirect_configuration {
+    name                       = "${var.application_name}ApiHTTPRule"
+    include_path               = "true"
+    include_query_string       = "true"
+    target_listener_name       = "${var.application_name}ApiListener"
+    redirect_type              = "Permanent"
+  }
   request_routing_rule {
-    name                       = "alphasiteApiRule"
+    name                       = "${var.application_name}ApiHTTPRule"
+    http_listener_name         = "${var.application_name}ApiHTTPListener"
+    redirect_configuration_name = "${var.application_name}ApiHTTPRule"
+    rule_type                   = "Basic"
+  }
+  request_routing_rule {
+    name                       = "${var.application_name}ApiRule"
     rule_type                  = "Basic"
-    http_listener_name         = "alphasiteApiListener"
-    backend_address_pool_name  = "alphasiteApiPool"
+    http_listener_name         = "${var.application_name}ApiListener"
+    backend_address_pool_name  = "${var.application_name}ApiPool"
     backend_http_settings_name = "api-https"
     rewrite_rule_set_name = "CORS"
   }
 
+
+  redirect_configuration {
+    name                       = "${var.application_name}AdminHTTPRule"
+    include_path               = "true"
+    include_query_string       = "true"
+    target_listener_name       = "${var.application_name}AdminListener"
+    redirect_type              = "Permanent"
+  }
   request_routing_rule {
-    name                       = "alphasiteAdminRule"
+    name                       = "${var.application_name}AdminHTTPRule"
+    http_listener_name         = "${var.application_name}AdminHTTPListener"
+    redirect_configuration_name = "${var.application_name}AdminHTTPRule"
+    rule_type                   = "Basic"
+  }
+  request_routing_rule {
+    name                       = "${var.application_name}AdminRule"
     rule_type                  = "Basic"
-    http_listener_name         = "alphasiteAdminListener"
-    backend_address_pool_name  = "alphasiteAdminPool"
+    http_listener_name         = "${var.application_name}AdminListener"
+    backend_address_pool_name  = "${var.application_name}AdminPool"
     backend_http_settings_name = "admin-https"
     rewrite_rule_set_name = "CORS"
-  } 
+  }
+
 
 }
