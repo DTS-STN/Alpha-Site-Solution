@@ -25,6 +25,7 @@ resource "azurerm_postgresql_server" "pgsql-server" {
   administrator_login_password = azurerm_key_vault_secret.pgsql-db-pass.value
   version                      = "11"
   ssl_enforcement_enabled      = true
+  ssl_minimal_tls_version_enforced = "TLS1_2"
 }
 
 resource "azurerm_postgresql_database" "pgsql-db" {
