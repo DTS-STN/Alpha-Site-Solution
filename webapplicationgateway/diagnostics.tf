@@ -59,7 +59,7 @@ resource "azurerm_monitor_diagnostic_setting" "application-primary-diagnostics" 
       enabled  = true
 
       retention_policy {
-        enabled = false
+        enabled = true
         days = 30
       }
     }
