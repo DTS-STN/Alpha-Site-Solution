@@ -4,7 +4,6 @@ resource "azurerm_log_analytics_workspace" "application-primary-analytics-worksp
   resource_group_name = var.network_resource_group
   sku                 = "PerGB2018"
   retention_in_days   = 30
-
 }
 
 resource "azurerm_monitor_diagnostic_setting" "application-primary-analytics" {
