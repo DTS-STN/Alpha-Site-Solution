@@ -19,7 +19,8 @@ resource "azurerm_key_vault" "keyvault" {
       "Get",
       "List",
       "Set",
-      "Delete"
+      "Delete", 
+      "Purge"
     ]
   } 
 }
