@@ -22,7 +22,8 @@ resource "azurerm_monitor_diagnostic_setting" "application-primary-analytics" {
       enabled  = true
 
       retention_policy {
-        enabled = false
+        enabled = true
+        days = 30
       }
     }
   }
@@ -36,7 +37,8 @@ resource "azurerm_monitor_diagnostic_setting" "application-primary-analytics" {
       enabled  = true
 
       retention_policy {
-        enabled = false
+        enabled = true
+        days = 30
       }
     }
   }
@@ -59,6 +61,7 @@ resource "azurerm_monitor_diagnostic_setting" "application-primary-diagnostics" 
 
       retention_policy {
         enabled = false
+        days = 30
       }
     }
   }
@@ -68,6 +71,7 @@ resource "azurerm_monitor_diagnostic_setting" "application-primary-diagnostics" 
 
     retention_policy {
       enabled = true
+      days = 30
     }
   }
 }
