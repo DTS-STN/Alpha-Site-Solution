@@ -62,15 +62,7 @@ variable "vnet_id" {
     type = string
     default = ""
 }
-variable "vnet_id_secondary" {
-    type = string
-    default = ""
-}
 variable "subnet_id" {
-    type = string
-    default = ""
-}
-variable "subnet_id_secondary" {
     type = string
     default = ""
 }
@@ -78,15 +70,7 @@ variable "public_ip_id_primary" {
     type = string
     default = ""
 }
-variable "public_ip_id_secondary" {
-    type = string
-    default = ""
-}
 variable "primary_public_ip_fqdn" {
-    type = string
-    default = ""
-}
-variable "secondary_public_ip_fqdn" {
     type = string
     default = ""
 }
@@ -103,15 +87,7 @@ variable "primary_application_appservice_hostname"{
     type = string
     default = ""
 }
-variable "secondary_application_appservice_hostname" {
-    type = string
-    default = ""
-}
 variable "primary_api_appservice_hostname" {
-    type = string
-    default = ""
-}
-variable "secondary_api_appservice_hostname" {
     type = string
     default = ""
 }
@@ -119,15 +95,7 @@ variable "primary_admin_appservice_hostname" {
     type = string
     default = ""
 }
-variable "secondary_admin_appservice_hostname" {
-    type = string
-    default = ""
-}
 variable "diagnostic_storage_account_id" {
-    type = string
-    default = ""
-}
-variable "secondary_diagnostic_storage_account_id" {
     type = string
     default = ""
 }
@@ -214,10 +182,6 @@ variable "MONGO_DB" {
     default = ""
 }
 variable "admin_app_service_plan_id" {
-    type = string
-    default = ""
-}
-variable "secondary_app_service_plan_id" {
     type = string
     default = ""
 }
