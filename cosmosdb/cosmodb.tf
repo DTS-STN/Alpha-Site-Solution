@@ -35,7 +35,7 @@ resource "azurerm_cosmosdb_account" "cosmosdb-account" {
 
   backup {
     type = "Periodic"
-    interval_in_hours = 12
+    interval_in_minutes = 1440
     retention_in_hours = 720
   }
 }
