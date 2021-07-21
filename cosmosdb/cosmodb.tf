@@ -7,6 +7,8 @@ resource "azurerm_cosmosdb_account" "cosmosdb-account" {
   mongo_server_version = "4.0"
 
   enable_automatic_failover = false
+  is_virtual_network_filter_enabled  = false
+  ip_range_filter = "104.42.195.92,40.76.54.131,52.176.6.30,52.169.50.45,52.187.184.26"
 
   capabilities {
     name = "EnableAggregationPipeline"
