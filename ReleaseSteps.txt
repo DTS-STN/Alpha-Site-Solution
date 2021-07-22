@@ -1,0 +1,35 @@
+Release Steps:
+- DTS-Deployment
+	- Create a new json based on example.json
+	- Replaces "changeme" values
+		- terraform_sp_name Make sure that this is very self explanatory to anyone seeing the name as SP are globaly viewable
+		- remote_state_storage_account_name must be globally unique, we recommend making it obvious what sub its for and who owns it
+	- Run newEnvironmentBootstrah.sh with your new json as argument
+	- This will update your json so make sure you keep it secure
+
+- Alpha-Site-Solution
+	- Create a new json based on the example.json
+		- Replace the top 8 fields with data from the previous json. You HAVE TO get the object_id from run az ad sp show --id
+		- Replace all fields required in the json making sure to use an appropriate lowercase name for application_name
+			- application_name must be lowercase and max 15 characters
+			- environment must be max 6 characters
+
+	- Run createContainer.sh with the new json as argument
+	- Run terragrunt init
+
+	- In order run terragrunt plan/apply in each folder
+		- resourcegroups
+		- infrastructure
+		- cosmosdb
+		- pgsql
+		- appservice
+		- appserviceadmin
+		- appserviceapi
+		- webapplicationgateway
+
+	- Once everything is released we must add the IPs to allow access to the DB
+		- AppService ips must be added to cosmodb
+		- AppServiceAPI ips must be added to pgsql
+
+		- Go to the AppService, Networking (preview) and copy Outbound Traffic Addresses
+		- For CosmoDB go to Firewall and virtual networks and add the ips one per row
