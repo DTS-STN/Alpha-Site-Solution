@@ -19,7 +19,7 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     exclusion {
       match_variable = "RequestCookieNames"
       selector_match_operator = "Equals"
-      selector = "s_sq"
+      selector = var.WAF_COOKIE_EXCLUSION
     }
     disabled_rule_group {
       rule_group_name = "REQUEST-931-APPLICATION-ATTACK-RFI"
