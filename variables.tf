@@ -221,3 +221,7 @@ variable "NOTIFY_REPORT_A_PROBLEM_TEMPLATE_ID" {
     type = string
     default = ""
 }
+variable "WAF_COOKIE_EXCLUSION" {
+    type = string
+    default = ""
+}

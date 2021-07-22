@@ -16,6 +16,11 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     firewall_mode    = "Prevention"
     rule_set_type    = "OWASP"
     rule_set_version = "3.0"
+    exclusion {
+      match_variable = "RequestCookieNames"
+      selector_match_operator = "Equals"
+      selector = var.WAF_COOKIE_EXCLUSION
+    }
     disabled_rule_group {
       rule_group_name = "REQUEST-931-APPLICATION-ATTACK-RFI"
       rules = [931130]
