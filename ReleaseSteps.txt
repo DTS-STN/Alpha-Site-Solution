@@ -10,9 +10,11 @@ Release Steps:
 - Alpha-Site-Solution
 	- Create a new json based on the example.json
 		- Replace the top 8 fields with data from the previous json. You HAVE TO get the object_id from run az ad sp show --id
-		- Replace all fields required in the json making sure to use an appropriate lowercase name for application_name
-			- application_name must be lowercase and max 15 characters
+		- Replace all fields required in the json 
+			- make sure to use an appropriate lowercase name for application_name
+				- application_name must be lowercase and max 15 characters
 			- environment must be max 6 characters
+		- Get the domain wildcard variable from the dns zone you are releasing for
 
 	- Run createContainer.sh with the new json as argument
 	- Run terragrunt init
@@ -33,3 +35,6 @@ Release Steps:
 
 		- Go to the AppService, Networking (preview) and copy Outbound Traffic Addresses
 		- For CosmoDB go to Firewall and virtual networks and add the ips one per row
+
+	- Enable logging
+		- For each AppService navigate to "App Service Logs", set "Application Logging" to "File System"
