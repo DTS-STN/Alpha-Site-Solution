@@ -30,5 +30,6 @@
     "NOTIFY_BASE_API_URL":"changeme",
     "NOTIFY_API_KEY":"changeme",
     "NEXT_PUBLIC_NOTIFY_REPORT_A_PROBLEM_EMAIL":"changeme",
-    "NOTIFY_REPORT_A_PROBLEM_TEMPLATE_ID":"changeme"
+    "NOTIFY_REPORT_A_PROBLEM_TEMPLATE_ID":"changeme",
+    "WAF_COOKIE_EXCLUSION": "changeme"
 }
