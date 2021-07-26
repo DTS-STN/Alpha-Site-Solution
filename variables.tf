@@ -225,3 +225,15 @@ variable "WAF_COOKIE_EXCLUSION" {
     type = string
     default = ""
 }
+variable "staging_application_appservice_hostname" {
+    type = string
+    default = ""
+}
+variable "staging_admin_appservice_hostname" {
+    type = string
+    default = ""
+}
+variable "staging_api_appservice_hostname" {
+    type = string
+    default = ""
+}

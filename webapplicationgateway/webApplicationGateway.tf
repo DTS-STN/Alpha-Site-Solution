@@ -70,6 +70,21 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     fqdns       = [var.primary_admin_appservice_hostname]
   }
 
+  backend_address_pool {
+    name        = "${var.application_name}StagingApplicationPool"
+    fqdns       = [var.staging_application_appservice_hostname]
+  }
+
+  backend_address_pool {
+    name        = "${var.application_name}StagingApiPool"
+    fqdns       = [var.staging_api_appservice_hostname]
+  }
+
+  backend_address_pool {
+    name        = "${var.application_name}StagingAdminPool"
+    fqdns       = [var.staging_admin_appservice_hostname]
+  }
+
   http_listener {
     name                           = "${var.application_name}ApiListener"
     frontend_ip_configuration_name = "frontend"
@@ -124,6 +139,36 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     require_sni                    = false
   }
 
+  http_listener {
+    name                           = "${var.application_name}StagingApiListener"
+    frontend_ip_configuration_name = "frontend"
+    frontend_port_name             = "https"
+    protocol                       = "Https"
+    ssl_certificate_name           = "dts-stn-wildcard"
+    host_name                      = var.staging_api_appservice_hostname
+    require_sni                    = "true"
+  }
+
+  http_listener {
+    name                           = "${var.application_name}StagingApplicationListener"
+    frontend_ip_configuration_name = "frontend"
+    frontend_port_name             = "https"
+    protocol                       = "Https"
+    ssl_certificate_name           = "dts-stn-wildcard"
+    host_name                      = var.staging_application_appservice_hostname
+    require_sni                    = "true"
+  }
+
+  http_listener {
+    name                           = "${var.application_name}StagingAdminListener"
+    frontend_ip_configuration_name = "frontend"
+    frontend_port_name             = "https"
+    protocol                       = "Https"
+    ssl_certificate_name           = "dts-stn-wildcard"
+    host_name                      = var.staging_admin_appservice_hostname
+    require_sni                    = "true"
+  }
+
   ssl_certificate {
     name     = "dts-stn-wildcard"
     data     = var.domain_wildcard
@@ -154,6 +199,36 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     protocol            = "https"
     path                = var.healthcheck_page
     host                = var.primary_admin_appservice_hostname
+    interval            = "30"
+    timeout             = "30"
+    unhealthy_threshold = "3"
+  }
+
+  probe {
+    name                = "staging-application-probe"
+    protocol            = "https"
+    path                = var.healthcheck_page
+    host                = var.staging_application_appservice_hostname
+    interval            = "30"
+    timeout             = "30"
+    unhealthy_threshold = "3"
+  }
+
+  probe {
+    name                = "staging-api-probe"
+    protocol            = "https"
+    path                = var.healthcheck_page
+    host                = var.staging_api_appservice_hostname
+    interval            = "30"
+    timeout             = "30"
+    unhealthy_threshold = "3"
+  }
+
+  probe {
+    name                = "staging-admin-probe"
+    protocol            = "https"
+    path                = var.healthcheck_page
+    host                = var.staging_admin_appservice_hostname
     interval            = "30"
     timeout             = "30"
     unhealthy_threshold = "3"
@@ -271,6 +346,4 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     backend_http_settings_name = "admin-https"
     rewrite_rule_set_name = "CORS"
   }
-
-
 }
