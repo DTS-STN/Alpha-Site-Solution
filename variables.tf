@@ -237,6 +237,14 @@ variable "USER_UNSUBSCRIBE_ENGLISH_TEMPLATE_ID" {
     type = string
     default = ""
 }
+variable "USER_CSV_TEMPLATE_ID" {
+    type = string
+    default = ""
+}
+variable "CSV_AUTH_KEY" {
+    type = string
+    default = ""
+}
 variable "USER_SIGNUP_ENABLED" {
     type = string
     default = "true"
