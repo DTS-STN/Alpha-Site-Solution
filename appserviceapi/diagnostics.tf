@@ -80,3 +80,18 @@ log {
     }
   }
 }
+
+resource "azurerm_application_insights" "as-api-primary-appinsight" {
+  name    = "appinsight-${var.environment}-${var.location}"
+  location            = var.location
+  resource_group_name = var.appservice_resource_group
+  application_type    = "Node.JS"
+}
+
+output "instrumentation_key" {
+  value = azurerm_application_insights.as-api-primary-appinsight.instrumentation_key
+}
+
+output "app_id" {
+  value = azurerm_application_insights.as-api-primary-appinsight.app_id
+}
