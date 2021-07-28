@@ -26,6 +26,19 @@ resource "azurerm_app_service" "app-service-api-primary" {
   }
 
   app_settings = {
+    "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.as-api-primary-appinsight.instrumentation_key
+    "APPLICATIONINSIGHTS_CONNECTION_STRING" = "InstrumentationKey=${azurerm_application_insights.as-api-primary-appinsight.instrumentation_key}",
+    "APPINSIGHTS_PROFILERFEATURE_VERSION"             = "1.0.0",
+    "APPINSIGHTS_SNAPSHOTFEATURE_VERSION"             = "1.0.0",
+    "APPLICATIONINSIGHTS_CONFIGURATION_CONTENT"       = "",
+    "ApplicationInsightsAgent_EXTENSION_VERSION"      = "~3",
+    "DiagnosticServices_EXTENSION_VERSION"            = "~3",
+    "InstrumentationEngine_EXTENSION_VERSION"         = "disabled",
+    "SnapshotDebugger_EXTENSION_VERSION"              = "disabled",
+    "XDT_MicrosoftApplicationInsights_BaseExtensions" = "disabled",
+    "XDT_MicrosoftApplicationInsights_Mode"           = "recommended",
+    "XDT_MicrosoftApplicationInsights_PreemptSdk"     = "disabled",
+
     "APP_SERVICE" = "true"
     "DOCKER_REGISTRY_SERVER_URL" = var.docker_registry
     "DOCKER_REGISTRY_SERVER_USERNAME" = var.docker_registry_username
