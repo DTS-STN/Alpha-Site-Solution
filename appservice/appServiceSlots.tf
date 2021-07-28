@@ -20,6 +20,7 @@ resource "azurerm_app_service_slot" "app-service-primary" {
     }
 
     app_settings = {
+        "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
         "APP_SERVICE"                     = "true"
         "DOCKER_REGISTRY_SERVER_URL"      = var.docker_registry
         "DOCKER_REGISTRY_SERVER_USERNAME" = var.docker_registry_username
@@ -37,6 +38,8 @@ resource "azurerm_app_service_slot" "app-service-primary" {
         "NOTIFY_API_KEY"                  = var.NOTIFY_API_KEY
         "NEXT_PUBLIC_NOTIFY_REPORT_A_PROBLEM_EMAIL"   = var.NEXT_PUBLIC_NOTIFY_REPORT_A_PROBLEM_EMAIL
         "NOTIFY_REPORT_A_PROBLEM_TEMPLATE_ID" = var.NOTIFY_REPORT_A_PROBLEM_TEMPLATE_ID
+        "NEXT_PUBLIC_ADOBE_ANALYTICS_URL" = var.NEXT_PUBLIC_ADOBE_ANALYTICS_URL
+        "NEXT_PUBLIC_THANK_YOU_EMAIL"     = var.NEXT_PUBLIC_THANK_YOU_EMAIL
         "MONGO_URL"                       = var.MONGO_URL
         "MONGO_DB"                        = var.MONGO_DB
     }
