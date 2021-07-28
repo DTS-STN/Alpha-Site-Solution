@@ -29,6 +29,9 @@ inputs = merge({
   primary_application_appservice_hostname = dependency.appService.outputs.primaryAppServiceHostname
   primary_admin_appservice_hostname = dependency.appServiceAdmin.outputs.primaryAdminAppServiceHostname
   primary_api_appservice_hostname = dependency.appServiceAPI.outputs.primaryApiAppServiceHostname
+  staging_application_appservice_hostname = dependency.appService.outputs.stagingAppServiceHostname
+  staging_admin_appservice_hostname = dependency.appServiceAdmin.outputs.stagingAdminAppServiceHostname
+  staging_api_appservice_hostname = dependency.appServiceAPI.outputs.stagingApiAppServiceHostname
   diagnostic_storage_account_id  = dependency.infrastructure.outputs.diagnosticStorageAccountId
 })
 
