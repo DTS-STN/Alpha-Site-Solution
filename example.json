@@ -14,6 +14,8 @@
     "network_resource_group":"changeme",
     "database_resource_group":"changeme",
     "appservice_resource_group":"changeme",
+    "node_size": "S1",
+    "node_tier": "Standard",
     "docker_container":"changeme",
     "api_docker_container":"changeme",
     "admin_docker_container":"changeme",
