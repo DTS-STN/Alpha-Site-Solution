@@ -11,7 +11,9 @@ resource "azurerm_app_service_plan" "app-service-plan-admin" {
     size = "P1v2"
   }
 }
-
+variable instrumentation_key{
+  type = string
+}
 # Create App Services
 resource "azurerm_app_service" "app-service-admin-primary" {
   name                = "admin-appservice-${var.environment}"
@@ -40,8 +42,8 @@ resource "azurerm_app_service" "app-service-admin-primary" {
   }
 
   app_settings = {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.as-admin-primary-appinsight.instrumentation_key
-    "APPLICATIONINSIGHTS_CONNECTION_STRING" = "InstrumentationKey=${azurerm_application_insights.as-admin-primary-appinsight.instrumentation_key}",
+    "APPINSIGHTS_INSTRUMENTATIONKEY" = var.instrumentation_key
+    "APPLICATIONINSIGHTS_CONNECTION_STRING" = "InstrumentationKey=${var.instrumentation_key}",
     "APPINSIGHTS_PROFILERFEATURE_VERSION"             = "1.0.0",
     "APPINSIGHTS_SNAPSHOTFEATURE_VERSION"             = "1.0.0",
     "APPLICATIONINSIGHTS_CONFIGURATION_CONTENT"       = "",
@@ -53,6 +55,7 @@ resource "azurerm_app_service" "app-service-admin-primary" {
     "XDT_MicrosoftApplicationInsights_Mode"           = "recommended",
     "XDT_MicrosoftApplicationInsights_PreemptSdk"     = "disabled",
 
+    "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
     "APP_SERVICE" = "true"
     "DOCKER_REGISTRY_SERVER_URL" = var.docker_registry
     "DOCKER_REGISTRY_SERVER_USERNAME" = var.docker_registry_username

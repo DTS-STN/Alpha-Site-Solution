@@ -238,17 +238,9 @@ variable "NOTIFY_REPORT_A_PROBLEM_TEMPLATE_ID" {
     type = string
     default = ""
 }
-variable "NEXT_PUBLIC_ADOBE_ANALYTICS_URL" {
-    type = string
-    default = ""
-}
-variable "NEXT_PUBLIC_THANK_YOU_EMAIL" {
-    type = string
-    default = ""
-}
 variable "WAF_COOKIE_EXCLUSION" {
-    type = string
-    default = ""
+    type = list(string)
+    default = [""]
 }
 variable "staging_application_appservice_hostname" {
     type = string
