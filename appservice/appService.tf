@@ -7,8 +7,8 @@ resource "azurerm_app_service_plan" "app-service-plan-primary" {
   resource_group_name = var.appservice_resource_group
 
   sku {
-    tier = "PremiumV2"
-    size = "P1v2"
+    tier = var.node_tier
+    size = var.node_size
   }
 }
 

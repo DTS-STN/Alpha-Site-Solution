@@ -58,6 +58,12 @@ variable "application_name" {
 variable "environment" {
     type = string
 }
+variable "node_size" {
+    type = string
+}
+variable "node_tier" {
+    type = string
+}
 variable "vnet_id" {
     type = string
     default = ""
