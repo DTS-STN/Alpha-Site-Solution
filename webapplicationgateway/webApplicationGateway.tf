@@ -90,7 +90,7 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     frontend_ip_configuration_name = "frontend"
     frontend_port_name             = "https"
     protocol                       = "Https"
-    ssl_certificate_name           = "dts-stn-wildcard"
+    ssl_certificate_name           = var.api_cert_name
     host_name                      = var.api_url
     require_sni                    = "true"
   }
@@ -108,7 +108,7 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     frontend_ip_configuration_name = "frontend"
     frontend_port_name             = "https"
     protocol                       = "Https"
-    ssl_certificate_name           = "dts-stn-wildcard"
+    ssl_certificate_name           = var.application_cert_name
     host_name                      = var.application_url
     require_sni                    = "true"
   }
@@ -126,7 +126,7 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     frontend_ip_configuration_name = "frontend"
     frontend_port_name             = "https"
     protocol                       = "Https"
-    ssl_certificate_name           = "dts-stn-wildcard"
+    ssl_certificate_name           = var.admin_cert_name
     host_name                      = var.admin_url
     require_sni                    = "true"
   }
@@ -144,7 +144,7 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     frontend_ip_configuration_name = "frontend"
     frontend_port_name             = "https"
     protocol                       = "Https"
-    ssl_certificate_name           = "dts-stn-wildcard"
+    ssl_certificate_name           = var.api_cert_name
     host_name                      = var.staging_api_appservice_hostname
     require_sni                    = "true"
   }
@@ -154,7 +154,7 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     frontend_ip_configuration_name = "frontend"
     frontend_port_name             = "https"
     protocol                       = "Https"
-    ssl_certificate_name           = "dts-stn-wildcard"
+    ssl_certificate_name           = var.admin_cert_name
     host_name                      = var.staging_application_appservice_hostname
     require_sni                    = "true"
   }
@@ -164,14 +164,18 @@ resource "azurerm_application_gateway" "application-gateway-v2-primary" {
     frontend_ip_configuration_name = "frontend"
     frontend_port_name             = "https"
     protocol                       = "Https"
-    ssl_certificate_name           = "dts-stn-wildcard"
+    ssl_certificate_name           = var.admin_cert_name
     host_name                      = var.staging_admin_appservice_hostname
     require_sni                    = "true"
   }
 
-  ssl_certificate {
-    name     = "dts-stn-wildcard"
-    data     = var.domain_wildcard
+  dynamic ssl_certificate {
+    for_each = var.cert_list
+    content {
+      name = ssl_certificate.value["cert_name"]
+      data = ssl_certificate.value["cert"]
+      password = ssl_certificate.value["password"]
+    }
   }
 
   probe {

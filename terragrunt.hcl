@@ -17,7 +17,7 @@ EOF
 
 locals {
   varfile = get_env("TG_VAR_FILE")
-  vardata = local.varfile != null ? jsondecode(file(local.varfile)) : {  } # some default
+  vardata = jsondecode(file(local.varfile)) # some default
 
   depot_resource_group = local.vardata.tfstate_storage_rg
   remote_state_storage_account_name = local.vardata.remote_state_storage_account_name

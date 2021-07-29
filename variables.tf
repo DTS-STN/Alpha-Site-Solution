@@ -130,7 +130,16 @@ variable "relative_dns_name" {
 variable "healthcheck_page" {
     type = string
 }
-variable "domain_wildcard" {
+variable "cert_list" {
+    type = list(map(string))
+}
+variable "admin_cert_name" {
+    type = string
+}
+variable "api_cert_name" {
+    type = string
+}
+variable "application_cert_name" {
     type = string
 }
 variable "database_host" {
