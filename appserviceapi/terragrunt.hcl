@@ -40,6 +40,7 @@ inputs = merge({
     docker_registry_username = dependency.infrastructure.outputs.dockerRegistryUsername
     docker_registry_password = dependency.infrastructure.outputs.dockerRegistryPassword
     strapi_admin_jwt_secret = dependency.appServiceAdmin.outputs.strapiJWT
+    instrumentation_key = dependency.appService.outputs.instrumentation_key
 })
 
 terraform {

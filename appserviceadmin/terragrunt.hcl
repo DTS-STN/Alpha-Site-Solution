@@ -23,6 +23,7 @@ inputs = merge({
     docker_registry_username = dependency.infrastructure.outputs.dockerRegistryUsername
     docker_registry_password = dependency.infrastructure.outputs.dockerRegistryPassword
     keyvault_id = dependency.infrastructure.outputs.keyvaultID
+    instrumentation_key = dependency.appService.outputs.instrumentation_key
 })
 
 terraform {

@@ -20,12 +20,13 @@ resource "azurerm_app_service_slot" "app-service-admin-primary" {
     }
 
     app_settings = {
-    "APP_SERVICE" = "true"
-    "DOCKER_REGISTRY_SERVER_URL" = var.docker_registry
-    "DOCKER_REGISTRY_SERVER_USERNAME" = var.docker_registry_username
-    "DOCKER_REGISTRY_SERVER_PASSWORD" = var.docker_registry_password
-    "SLOT_NAME" = "default"
-    "STRAPI_API_BACKEND_URL" = var.api_url
+        "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
+        "APP_SERVICE" = "true"
+        "DOCKER_REGISTRY_SERVER_URL" = var.docker_registry
+        "DOCKER_REGISTRY_SERVER_USERNAME" = var.docker_registry_username
+        "DOCKER_REGISTRY_SERVER_PASSWORD" = var.docker_registry_password
+        "SLOT_NAME" = "default"
+        "STRAPI_API_BACKEND_URL" = var.api_url
     }
 
 }

@@ -1,4 +1,7 @@
 # Create App Services
+variable instrumentation_key{
+  type = string
+}
 resource "azurerm_app_service" "app-service-api-primary" {
   name                = "api-appservice-${var.environment}"
   location            = var.location
@@ -26,8 +29,9 @@ resource "azurerm_app_service" "app-service-api-primary" {
   }
 
   app_settings = {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.as-api-primary-appinsight.instrumentation_key
-    "APPLICATIONINSIGHTS_CONNECTION_STRING" = "InstrumentationKey=${azurerm_application_insights.as-api-primary-appinsight.instrumentation_key}",
+    "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
+    "APPINSIGHTS_INSTRUMENTATIONKEY" = var.instrumentation_key
+    "APPLICATIONINSIGHTS_CONNECTION_STRING" = "InstrumentationKey=${var.instrumentation_key}",
     "APPINSIGHTS_PROFILERFEATURE_VERSION"             = "1.0.0",
     "APPINSIGHTS_SNAPSHOTFEATURE_VERSION"             = "1.0.0",
     "APPLICATIONINSIGHTS_CONFIGURATION_CONTENT"       = "",
