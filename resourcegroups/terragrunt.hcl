@@ -22,7 +22,7 @@ terraform {
 
 locals {
   varfile = "${get_parent_terragrunt_dir()}/${get_env("TG_VAR_FILE")}"
-  vardata = local.varfile != null ? jsondecode(file(local.varfile)) : {  } # some default
+  vardata = jsondecode(file(local.varfile))# some default
   subscription_id = local.vardata.subscription_id
   tenant_id = local.vardata.tenant_id
   client_id = local.vardata.client_id

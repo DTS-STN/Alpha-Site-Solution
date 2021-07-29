@@ -52,6 +52,6 @@ terraform {
 
 locals {
   varfile = "${get_parent_terragrunt_dir()}/${get_env("TG_VAR_FILE")}"
-  vardata = local.varfile != null ? jsondecode(file(local.varfile)) : { } # some default
+  vardata = jsondecode(file(local.varfile))# some default
 }
 
