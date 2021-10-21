@@ -1,8 +1,18 @@
+resource "azurerm_network_ddos_protection_plan" "ddospplan" {
+  name                = "ddospplan"
+  location            = var.location
+  resource_group_name = var.network_resource_group
+}
+
 resource "azurerm_virtual_network" "appservice_vnet" {
   name                = "appservice_vnet-${var.environment}"
   resource_group_name = var.network_resource_group
   location            = var.location
   address_space       = ["10.254.0.0/16"]
+  ddos_protection_plan {
+    id     = azurerm_network_ddos_protection_plan.ddospplan.id
+    enable = true
+  }
 }
 
 resource "azurerm_subnet" "frontend" {
